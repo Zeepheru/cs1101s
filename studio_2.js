@@ -48,8 +48,8 @@ function last_combo(order) {
 
 // Q8
 function other_combos(order) {
+    // return (order - order % 10) / 10; // alt, this is most definitely slower lmao
     return math_floor(order / 10);
-    return (order - order % 10) / 10; // alt, this is most definitely slower lmao
 }
 
 // testing
