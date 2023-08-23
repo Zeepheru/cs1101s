@@ -1,0 +1,60 @@
+import { stack, heart, show, stackn, stack_frac, make_cross
+    
+} from "rune";
+
+const test_rune_a = stack_frac(1/4, heart, 
+                            stack_frac(1/3, heart, 
+                            stack_frac(1/2, heart, heart))
+                            );
+
+//  recursion & iteration
+function test_stackn(n, rune) {
+    // also that kind of multiline
+    return n === 1 
+            ? rune
+            : stack_frac(1/n, 
+                        rune, 
+                        test_stackn(n-1, rune));
+}
+
+function test_repeat_pattern(n, func, rune) {
+    return n === 0
+            ? rune
+            : test_repeat_pattern(n-1, func, func(rune));
+            
+    // less efficient method, I think?
+    // return n === 1
+    //         ? func(rune)
+    //         : test_repeat_pattern(n-1, func, func(rune));
+}
+
+function repeat_pattern_general(n, pat, i) {
+    // gets you pat(pat(pat(...pat(i)...))), with pat repeated n times
+    return n === 0
+            ? i
+            : repeat_pattern_general(n-1, pat, pat(i));
+}
+
+function factorial_rec(n) {
+    // using zero since 0! === 1
+    return n === 0
+            ? n
+            : n * factorial(n-1);
+}
+
+function iter(product, counter, n) {
+    // helper func
+    // ah, AH, AH I SEE
+    return counter > n
+            ? product
+            : iter(counter * product, counter + 1, n);
+}
+
+function factorial_iter(n) {
+    return iter (1, 1, n)
+}
+
+
+// show(test_stackn(5, heart));
+// show(test_repeat_pattern(3, make_cross, heart));
+factorial(5);
