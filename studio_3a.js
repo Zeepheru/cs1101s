@@ -1,5 +1,4 @@
 // S3a
-
 import {
     circle, square, show, beside, beside_frac,
     stackn, blank, ribbon, stack, repeat_pattern, stack_frac
@@ -12,13 +11,15 @@ function moony_1(bottom_right) {
 }
 
 function moony_2(n) {
+    // basically how return_pattern() works, I think
     return n === 1
             ? circle
             : moony_1(moony_2(n - 1));
 }
 
 function moony(n) {
-    // anyhow whack also can reach 
+    // anyhow whack also can get the right fraction
+    // but yes, if you visualize it's correct
     return n === 0
             ? circle
             : beside_frac(
