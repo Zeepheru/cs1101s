@@ -40,7 +40,8 @@ the result of the recursive call)
 \Theta(n)? for both time and space
 Since it seems linear
 
-assumes that primitive runes take the same amt of space
-primitive operations take the same amt of time
+
+Assumptions
+everything else is free/takes constant time
 
 */
