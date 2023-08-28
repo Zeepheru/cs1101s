@@ -36,7 +36,10 @@ show(moony(5));
 Recursive (since result of function is not 
 the result of the recursive call)
 
-\Theta(n)?
+\Theta(n)? for both time and space
 Since it seems linear
+
+assumes that primitive runes take the same amt of space
+primitive operations take the same amt of time
 
 */
