@@ -12,6 +12,7 @@ as b grows, \Theta(1)
 
 
 function fast_expt(b, n) {
+    // b is base, n is exponent
     return n === 0
             ? 1
             : n % 2 === 0
@@ -30,3 +31,15 @@ function fast_expt_with_neg(b, n) {
 }
 
 fast_expt(32, 33);
+
+// pretty interesting how it's \Theta(log(n))
+
+// iterative version basically does: 
+/*
+
+2 ^ 8 = 4 ^ 4
+2 ^ 7 = 4 * 6
+
+benefit is that its space is \Theta(1) instead of \Theta(log(n))
+
+*/
