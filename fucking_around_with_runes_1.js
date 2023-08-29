@@ -55,6 +55,7 @@ function cone(n, rune){
 //                         turn_upside_down(heart)));
                         
 const result_0 = cone(2100, scale_independent(0.7, 1.2, circle));
+// 1200 is also nice
                         
 const result_1 = scale(0.7, result_0);
 
