@@ -17,6 +17,7 @@ const note_8th = beat / 2;
 const note_16th = beat / 4;
 
 // notes -> frequences
+// no sharps q.q
 const D4 = letter_name_to_frequency("D4");
 const F4 = letter_name_to_frequency("F4");
 const G4 = letter_name_to_frequency("G4");
