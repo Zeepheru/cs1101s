@@ -2,7 +2,7 @@
 
 import { 
     make_sound, play, 
-    consecutively, 
+    consecutively, simultaneously,
     letter_name_to_frequency,
     square_sound, silence_sound
 } from "sound";
@@ -30,8 +30,45 @@ const Bb3 = letter_name_to_frequency("Bb3");
 
 const rest_16th = silence_sound(note_16th);
 
+// PLAYING CHORDS
+function square_octave(note_freq, length) {
+    // up one octave - technically not a chord but whatever
+    return simultaneously(
+                list(
+                    square_sound(note_freq, length),
+                    square_sound(note_freq * 2, length)));
+}
+
+function square_octave_triple(note_freq, length) {
+    // up and down one octave
+    // doesn't sound nice btw
+    return simultaneously(
+                list(
+                    square_sound(note_freq / 2, length),
+                    square_sound(note_freq, length),
+                    square_sound(note_freq * 2, length)));
+}
+
+function square_maj_chord(note_freq, length) {
+    // sounds way too fucking happy lmaooo
+    return simultaneously(
+                list(
+                    square_sound(note_freq, length), // root
+                    square_sound(note_freq * 1.25, length), // maj 3rd
+                    square_sound(note_freq * 1.5, length), // 5th
+                    square_sound(note_freq * 2, length))); // octave
+}
+
+function square_pwr_chord(note_freq, length) {
+    return simultaneously(
+                list(
+                    square_sound(note_freq, length), // root
+                    square_sound(note_freq * 1.5, length), // 5th
+                    square_sound(note_freq * 2, length))); // octave
+}
 
 
+// the actual melody
 function riff_section(starting_note, note_generator) {
     // TEMP - creating the starting double 16th notes here
     const start = list(
@@ -58,10 +95,12 @@ function riff_section(starting_note, note_generator) {
 
 // test
 
-const m1 = riff_section(D4, square_sound);
-const m2 = riff_section(C4, square_sound);
-const m3 = riff_section(B3, square_sound);
-const m4 = riff_section(Bb3, square_sound);
+const note_generator = square_octave;
+
+const m1 = riff_section(D4, note_generator);
+const m2 = riff_section(C4, note_generator);
+const m3 = riff_section(B3, note_generator);
+const m4 = riff_section(Bb3, note_generator);
 
 
 // please ignore this terrible implementation
