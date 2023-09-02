@@ -96,7 +96,7 @@ function riff_section(starting_note, note_generator) {
 
 // test
 
-const note_generator = square_octave;
+const note_generator = square_pwr_chord;
 
 const m1 = riff_section(D4, note_generator);
 const m2 = riff_section(C4, note_generator);
