@@ -59,7 +59,9 @@ function length(xs) {
 }
 
 function length_iter(xs) {
+    draw_data("length_iter", xs);
     function len(ys, counted_so_far) {
+        draw_data("len", ys, counted_so_far);
         return is_null(ys)
                 ? counted_so_far
                 : len(tail(ys), counted_so_far + 1);
@@ -67,3 +69,5 @@ function length_iter(xs) {
     
     return len(xs, 0);
 }
+
+length_iter(pair(20, pair(30, pair(40, null))));
