@@ -19,8 +19,12 @@ const tail = pair => pair((x, y) => y);
 
 // CASE STUDY: Rational Numbers
 // also just randomly trying verbose variable naming
+function gcd(a, b) {
+    return b === 0 ? a : gcd(b, a % b);
+}
 function make_rational_number(numerator, denominator) {
-    return pair(numerator, denominator);
+    const g = gcd(numerator, denominator);
+    return pair(numerator / g, denominator / g);
 }
 function numerator(rational) {
     return head(rational);
