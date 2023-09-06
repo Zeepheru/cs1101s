@@ -49,3 +49,21 @@ function rational_to_string(rational) {
             stringify(denominator(rational));
 }
 // etc, etc...
+
+
+// LENGTH OF A LIST
+function length(xs) {
+    return is_null(xs) // base case, list is empty!
+            ? 0
+            : 1 + length(tail(xs));
+}
+
+function length_iter(xs) {
+    function len(ys, counted_so_far) {
+        return is_null(ys)
+                ? counted_so_far
+                : len(tail(ys), counted_so_far + 1);
+    }
+    
+    return len(xs, 0);
+}
