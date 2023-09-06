@@ -5,3 +5,10 @@
 function make_point(x, y) {
     return component => component === 0 ? x : y;
 }
+
+// selectors
+const x_of = point => point(0); 
+const y_of = point => point(1);
+
+// pair and head (another way, from the quest lol)
+const pair = (x, y) => f = f(x, y);
