@@ -18,10 +18,10 @@ const list_q3c = list(7, list(list(list(6, 5, list(list(4)), 3), 2)), 1);
 
 const q3a = head(tail(tail(tail(list_q3a))));
 const q3b = head(tail(tail(head(tail(list_q3b)))));
-const q3c = head(head(tail(tail(head(head(head(tail(list_q3c))))))));
+const q3c = head(head(head(tail(tail(head(head(head(tail(list_q3c)))))))));
 
 // answer checking!
-const to_check = q3b;
+const to_check = q3c;
 
 // draw_data(to_check);
 // display(to_check);
