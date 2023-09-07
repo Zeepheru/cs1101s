@@ -23,7 +23,7 @@ const q3c = head(head(head(tail(tail(head(head(head(tail(list_q3c)))))))));
 // answer checking!
 const to_check = q3c;
 
-// draw_data(to_check);
+draw_data(to_check);
 // display(to_check);
 // display_list(to_check);
 
