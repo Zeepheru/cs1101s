@@ -5,6 +5,7 @@ const q1b = pair(1, list(2, 3, pair(4, null)));
 const q1c = pair(1, pair(2, list(3, list(4, 5))));
 
 function reverse(lst) {
+    // does not work to make a list bcz tail of last return is not a list
     return is_null(lst) 
         ? null
         : pair(reverse(tail(lst)), head(lst));
@@ -23,7 +24,7 @@ const q3c = head(head(tail(head(tail(head(tail(tail(tail(list_q3c)))))))));
 const q3d = head(head(head(tail(tail(list_q3d)))));
  
 // answer checking!
-const to_check = list_q3d;
+const to_check = q1b;
 
 draw_data(to_check);
 display(to_check);
