@@ -24,7 +24,7 @@ const q3c = head(head(tail(head(tail(head(tail(tail(tail(list_q3c)))))))));
 const q3d = head(head(head(tail(tail(list_q3d)))));
  
 // answer checking!
-const to_check = q1b;
+const to_check = q3c;
 
 draw_data(to_check);
 display(to_check);
