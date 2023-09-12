@@ -4,10 +4,28 @@ import {
     make_sound, play, 
     consecutively, simultaneously,
     letter_name_to_frequency,
-    square_sound, silence_sound
+    square_sound, silence_sound, 
+    get_duration, get_wave
 } from "sound";
 
 // setting params
+
+import {
+    make_point, draw_connected_full_view_proportional
+} from "curve";
+
+// make waveform
+function show_waveform(sound) {
+    const dur = get_duration(sound);
+    const draw_freq = 24000; // standard for most audio formats
+    
+    const wave = t => get_wave(sound)(t);
+    
+    const waveform_curve = x => make_point(x * 2, wave(x * dur) / 2);
+    
+    draw_connected_full_view_proportional(draw_freq * dur)(waveform_curve);
+}
+
 
 const bpm = 120;
 // assuming 4/4
@@ -108,4 +126,5 @@ const m4 = riff_section(Bb3, note_generator);
 const test_clip = consecutively(
                         append(m1, append(m2, append(m3, m4))));
                             
-play(test_clip);
+show_waveform(test_clip);
+// play(test_clip);
