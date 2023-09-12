@@ -3,6 +3,7 @@ import {
     consecutively, simultaneously,
     letter_name_to_frequency, midi_note_to_frequency,
     square_sound, silence_sound, sawtooth_sound, sine_sound, triangle_sound,
+    noise_sound, adsr,
     get_duration, get_wave
 } from "sound";
 
@@ -58,14 +59,44 @@ function kick_sound_1(duration) {
     const kick_wave = t => math_exp(-3.3 * t / duration) * 
                             math_sin(100 * math_sqrt(t * 2)) *
                             sigmoid(duration, t);
-    return make_sound(kick_wave, duration);
-    
+    return adsr(0.02, 0, 0.8, 0.1)(make_sound(kick_wave, duration)); // no need sigmoid now?
 }
+
+function some_other_drum(duration) {
+    const noise = t => get_wave(noise_sound(duration))(t);
+     
+    const wave = t => math_exp(-2 * t / duration) * 
+                            (math_sin(100 * math_sqrt(t * 3)) - 0.073 * math_cos(200 * math_sqrt(t)) - 
+                            0.186 * math_cos(1200 * math_sqrt(t)));
+    return make_sound(wave, duration);
+}
+
+function cymbal_sound_1(duration) {
+    const noise = t => get_wave(noise_sound(duration))(t);
+    
+    const wave = t => math_exp(-7 * t / duration) * (noise(t) * noise(t) - 1 * 
+                        math_sin(10 * math_sqrt(t)));
+    
+    return adsr(0.05, 0, 0.8, 0.1)(make_sound(wave, duration));
+}
+
+function cymbal_sound_2(duration) {
+    const noise = t => get_wave(noise_sound(duration))(t);
+    
+    const wave = t => math_exp(-10 * t / duration) * 1.4 * (get_wave(noise)(t) * noise(t) 
+                        - 0.1 * 
+                        math_sin(1000 * math_sqrt(t)));
+    
+    return adsr(0.05, 0, 0.8, 0.1)(make_sound(wave, duration));
+}
+ 
 const kick_1 = kick_sound_1(beat);
 
-const kick_test = consecutively(list(kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1));
+const drum1 = cymbal_sound_2(beat);
+
+// const kick_test = consecutively(list(kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1));
 
 // test_show_function();
 
-show_waveform(kick_1);
-play(kick_test);
+show_waveform(drum1);
+play(drum1);
