@@ -109,10 +109,10 @@ function cymbal_sound_3(duration) {
     return adsr(0.02, 0, 0.8, 0.1)(make_sound(wave, duration));
 }
  
-const kick_1 = kick_sound_1(beat);
+const kick_1 = kick_sound_1(note_8th);
 
-const cym = cymbal_sound_3(beat);
-const snare = snare_perhaps(beat);
+const cym = cymbal_sound_3(note_8th);
+const snare = snare_perhaps(note_8th);
 
 // const kick_test = consecutively(list(kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1));
 
@@ -126,7 +126,8 @@ const d2 = consecutively(list(cym, cym, cym, cym));
 
 const drums = simultaneously(list(d1, d2));
 
-const drum_test = consecutively(list(drums, drums, drums, drums));
+const drums_x4 = consecutively(list(drums, drums, drums, drums));
+const drums_x16 = consecutively(list(drums_x4, drums_x4, drums_x4, drums_x4));
 show_waveform(drum_test);
 
 play(drum_test);
