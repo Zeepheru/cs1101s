@@ -49,6 +49,10 @@ const measure  = beat * 4;
 const note_8th = beat / 2;
 const note_16th = beat / 4;
 
+const rest_16th = silence_sound(note_16th);
+const rest_8th = silence_sound(note_8th);
+const rest_beat = silence_sound(beat);
+
 
 // ok lets try to make a sound reminiscent of a kick\
 function sigmoid(d, x) {
@@ -96,14 +100,31 @@ function cymbal_sound_2(duration) {
     
     return adsr(0.05, 0, 0.8, 0.1)(make_sound(wave, duration));
 }
+
+function cymbal_sound_3(duration) {
+    const noise = t => get_wave(noise_sound(duration))(t);
+    
+    const wave = t => math_exp(-15 * t / duration) * (noise(t));
+    
+    return adsr(0.02, 0, 0.8, 0.1)(make_sound(wave, duration));
+}
  
 const kick_1 = kick_sound_1(beat);
 
-const drum1 = snare_perhaps(beat);
+const cym = cymbal_sound_3(beat);
+const snare = snare_perhaps(beat);
 
 // const kick_test = consecutively(list(kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1));
 
 // test_show_function();
 
-show_waveform(drum1);
-play(drum1);
+// show_waveform(drum1);
+// play(drum1);
+
+const d1 = consecutively(list(kick_1, kick_1, snare, rest_beat));
+const d2 = consecutively(list(cym, cym, cym, cym));
+
+const drum_test = simultaneously(list(d1, d2));
+show_waveform(drum_test);
+
+play(drum_test);
