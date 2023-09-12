@@ -42,7 +42,7 @@ function apply_function_to_list(f, lst) {
 }
 
 
-const bpm = 120;
+const bpm = 240;
 // assuming 4/4
 const beat = 1 / bpm * 60;
 const measure  = beat * 4;
@@ -124,7 +124,9 @@ const snare = snare_perhaps(beat);
 const d1 = consecutively(list(kick_1, kick_1, snare, rest_beat));
 const d2 = consecutively(list(cym, cym, cym, cym));
 
-const drum_test = simultaneously(list(d1, d2));
+const drums = simultaneously(list(d1, d2));
+
+const drum_test = consecutively(list(drums, drums, drums, drums));
 show_waveform(drum_test);
 
 play(drum_test);
