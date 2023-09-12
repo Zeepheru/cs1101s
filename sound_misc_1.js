@@ -9,7 +9,7 @@ import {
 // make waveform
 function show_waveform(sound) {
     const dur = get_duration(sound);
-    const draw_freq = 24000; // standard for most audio formats
+    const draw_freq = 48000; // standard for most audio formats
     
     const wave = t => get_wave(sound)(t);
     
