@@ -15,6 +15,7 @@ import {
 
 // make waveform
 function show_waveform(sound) {
+    // DO NOT USE WITH LONG DURATIONS. IT WILL COMPLETELY HANG.
     const dur = get_duration(sound);
     const draw_freq = 48000; // standard for most audio formats
     
