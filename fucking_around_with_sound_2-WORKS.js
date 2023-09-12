@@ -160,7 +160,7 @@ function generate_sound_t1(encoded_0) {
     
     // can add chords here
     const sound_func = sound_type === 1
-                        ? (freq, duration) => adsr(0.1, 0.3, 0.4, 0.2)(simultaneously(list(square_sound(freq, duration), square_sound(freq * 2, duration))))
+                        ? (freq, duration) => adsr(0.1, 0.3, 0.4, 0.2)(simultaneously(list(square_sound(freq, duration), square_sound(freq / 2, duration))))
                         : sound_type === 2
                         ? triangle_sound
                         : sound_type === 3
