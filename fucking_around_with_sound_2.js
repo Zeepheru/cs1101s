@@ -66,9 +66,18 @@ function some_other_drum(duration) {
     const noise = t => get_wave(noise_sound(duration))(t);
      
     const wave = t => math_exp(-2 * t / duration) * 
-                            (math_sin(100 * math_sqrt(t * 3)) - 0.073 * math_cos(200 * math_sqrt(t)) - 
-                            0.186 * math_cos(1200 * math_sqrt(t)));
+                            (math_sin(100 * math_sqrt(t * 2)) - 0.073 * math_cos(200 * math_sqrt(t)) - 
+                            0.186 * math_cos(1200 * t));
     return make_sound(wave, duration);
+}
+
+function snare_perhaps(duration) {
+    const noise = t => get_wave(noise_sound(duration))(t);
+     
+    const wave = t => math_exp(-4 * t / duration) * (math_exp(-5 * t / duration) 
+                            * (math_sin(160 * math_sqrt(t * 2)))
+                            - (noise(t)));
+    return (make_sound(wave, duration));
 }
 
 function cymbal_sound_1(duration) {
@@ -83,16 +92,14 @@ function cymbal_sound_1(duration) {
 function cymbal_sound_2(duration) {
     const noise = t => get_wave(noise_sound(duration))(t);
     
-    const wave = t => math_exp(-10 * t / duration) * 1.4 * (get_wave(noise)(t) * noise(t) 
-                        - 0.1 * 
-                        math_sin(1000 * math_sqrt(t)));
+    const wave = t => math_exp(-10 * t / duration) * 1.4 * (noise(t) * noise(t));
     
     return adsr(0.05, 0, 0.8, 0.1)(make_sound(wave, duration));
 }
  
 const kick_1 = kick_sound_1(beat);
 
-const drum1 = cymbal_sound_2(beat);
+const drum1 = snare_perhaps(beat);
 
 // const kick_test = consecutively(list(kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1));
 
