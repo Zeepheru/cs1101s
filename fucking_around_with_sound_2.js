@@ -12,7 +12,17 @@ import {
     make_point, draw_connected_full_view_proportional
 } from "curve";
 
-
+// make waveform
+function show_waveform(sound) {
+    const dur = get_duration(sound);
+    const draw_freq = 24000; // standard for most audio formats
+    
+    const wave = t => get_wave(sound)(t);
+    
+    const waveform_curve = x => make_point(x * 2, wave(x * dur) / 2);
+    
+    draw_connected_full_view_proportional(draw_freq * dur)(waveform_curve);
+}
 
 // const encoded_hex = "6fc5c70192bbfd5aa85abbb910870814a002a0b676a02145415188deb41d016f77590984b2ed23be534e9b37733bc";
 // // const encoded_t1 = parse_int(encoded_hex, 16);
