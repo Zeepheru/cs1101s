@@ -20,9 +20,27 @@ const encoded_hex = "6fc5c70192bbfd5aa85abbb910870814a002a0b676a02145415188deb41
 const encoded_t1 = 4200042162636400001641626364000016417401081690108000011616801160000116167011600001161650108162010816501081650108;
 const t1_spacer = 1e7;
 
+const test_list_encoded = list(
+    914115256, 
+900001256, 
+914115256, 
+900001256, 
+915301008, 
+914801008, 
+900001016, 
+914701016, 
+900001016, 
+914601016, 
+900001016, 
+914401008, 
+914101016, 
+914401016, 
+914601016);
+
 // IMPORTANT DEFINED
 const bpm = 120;
 const beat_duration = 1 / bpm * 60;
+const bar_duration = 1 / bpm * 60 * 4;
 //
 
 
@@ -44,25 +62,34 @@ const beat_duration = 1 / bpm * 60;
 // draw_data(note_encoded_list);
 
 
-
+function apply_function_to_list(f, lst) {
+    return is_null(lst)
+            ? null
+            : pair(f(head(lst)), apply_function_to_list(f, tail(lst)));
+}
 
 
 
 // try and generate sounds from t1 encoded numbers
-function generate_sound_t1(encoded) {
+function generate_sound_t1(encoded_0) {
     function get_freq(note_number) {
         return note_number === 0
                 ? 0
                 : midi_note_to_frequency(note_number);
     }
+    const encoded = encoded_0 - 9e8;
     
+    const dd = encoded % 1000;
+    const nn = ((encoded - dd) / 1000) % 100;
+    const sound_type = math_floor(encoded / 1e7);
+    const note_number = math_floor((encoded % 1e7) / 1e5) + 21;
     
-    const nn = encoded % 100;
-    const dd = ((encoded - nn) / 100) % 100;
-    const sound_type = math_floor(encoded / 10e6);
-    const note_number = math_floor((encoded % 10e6) / 10e4) + 21;
+    // display(dd);
+    // display(nn);
+    // display(note_number);
+    // display(nn/dd);
     
-    const duration = nn / dd * beat_duration;
+    const duration = bar_duration * nn / dd;
     
     const note_freq = get_freq(note_number);
 
@@ -79,8 +106,9 @@ function generate_sound_t1(encoded) {
     return sound_func(note_freq, duration);
 }
 
-const test_sound = generate_sound_t1(1626364);
+const test_sound = apply_function_to_list(generate_sound_t1, test_list_encoded);
+
+draw_data(test_sound);
 
 
-
-play(test_sound);
+play(consecutively(test_sound));
