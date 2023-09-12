@@ -7,8 +7,6 @@ import {
     get_duration, get_wave
 } from "sound";
 
-// setting params
-
 import {
     make_point, draw_connected_full_view_proportional
 } from "curve";
