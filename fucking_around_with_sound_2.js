@@ -24,6 +24,15 @@ function show_waveform(sound) {
     draw_connected_full_view_proportional(draw_freq * dur)(waveform_curve);
 }
 
+function apply_function_to_list(f, lst) {
+    return is_null(lst)
+            ? null
+            : pair(f(head(lst)), apply_function_to_list(f, tail(lst)));
+}
+
+
+
+
 // const encoded_hex = "6fc5c70192bbfd5aa85abbb910870814a002a0b676a02145415188deb41d016f77590984b2ed23be534e9b37733bc";
 // // const encoded_t1 = parse_int(encoded_hex, 16);
 
@@ -47,12 +56,5 @@ function show_waveform(sound) {
 
 // display(length(note_encoded_list));
 // draw_data(note_encoded_list);
-
-
-function apply_function_to_list(f, lst) {
-    return is_null(lst)
-            ? null
-            : pair(f(head(lst)), apply_function_to_list(f, tail(lst)));
-}
 
 
