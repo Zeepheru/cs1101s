@@ -114,6 +114,7 @@ function cymbal_sound_3(duration) {
 const kick_1 = kick_sound_1(note_8th);
 
 const cym = cymbal_sound_3(note_8th);
+const cym2 = cymbal_sound_2(note_8th);
 const snare = snare_perhaps(note_8th);
 
 // const kick_test = consecutively(list(kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1));
@@ -124,7 +125,7 @@ const snare = snare_perhaps(note_8th);
 // play(drum1);
 
 const d1 = consecutively(list(kick_1, kick_1, snare, rest_8th));
-const d2 = consecutively(list(cym, cym, cym, cym));
+const d2 = consecutively(list(cym, cym2, cym, cym));
 
 const drums = simultaneously(list(d1, d2));
 
