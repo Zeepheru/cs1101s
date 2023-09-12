@@ -50,6 +50,7 @@ const bar_duration = beat * 4;
 const measure  = beat * 4;
 const note_8th = beat / 2;
 const note_16th = beat / 4;
+const note_32nd = beat / 8;
 
 const rest_16th = silence_sound(note_16th);
 const rest_8th = silence_sound(note_8th);
@@ -112,6 +113,7 @@ function cymbal_sound_3(duration) {
 }
  
 const kick_1 = kick_sound_1(note_8th);
+const double_kick_metal = kick_sound_1(note_32nd);
 
 const cym = cymbal_sound_3(note_8th);
 const cym2 = cymbal_sound_2(note_8th);
@@ -124,6 +126,7 @@ const snare = snare_perhaps(note_8th);
 // show_waveform(drum1);
 // play(drum1);
 
+// const d1 = consecutively(list(double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal));
 const d1 = consecutively(list(kick_1, kick_1, snare, rest_8th));
 const d2 = consecutively(list(cym, cym2, cym, cym));
 
