@@ -12,6 +12,8 @@ import {
     make_point, draw_connected_full_view_proportional
 } from "curve";
 
+
+
 // make waveform
 function show_waveform(sound) {
     const dur = get_duration(sound);
@@ -24,6 +26,14 @@ function show_waveform(sound) {
     draw_connected_full_view_proportional(draw_freq * dur)(waveform_curve);
 }
 
+function test_show_function() {
+    // const f = x => (1 + math_expm1(-x / 1)) * (2 + math_expm1(-25 * (x / 1 - 0.001)));
+    const f = x => (math_expm1(-25 * (x / 1 - 0.001)));
+    
+    const test_func = x => make_point(x * 2, f(x * 2));
+    draw_connected_full_view_proportional(1000)(test_func);
+}
+
 function apply_function_to_list(f, lst) {
     return is_null(lst)
             ? null
@@ -31,30 +41,31 @@ function apply_function_to_list(f, lst) {
 }
 
 
+const bpm = 120;
+// assuming 4/4
+const beat = 1 / bpm * 60;
+const measure  = beat * 4;
+const note_8th = beat / 2;
+const note_16th = beat / 4;
 
 
-// const encoded_hex = "6fc5c70192bbfd5aa85abbb910870814a002a0b676a02145415188deb41d016f77590984b2ed23be534e9b37733bc";
-// // const encoded_t1 = parse_int(encoded_hex, 16);
+// ok lets try to make a sound reminiscent of a kick\
+function sigmoid(d, x) {
+    return (1 + math_exp(-25 * (x / d - 0.001)));
+}
 
-// const encoded_t1 = 4200042162636400001641626364000016417401081690108000011616801160000116167011600001161650108162010816501081650108;
-// const t1_spacer = 1e7;
+function kick_sound_1(duration) {
+    const kick_wave = t => math_exp(-3.3 * t / duration) * 
+                            math_sin(100 * math_sqrt(t * 2)) *
+                            sigmoid(duration, t);
+    return make_sound(kick_wave, duration);
+    
+}
+const kick_1 = kick_sound_1(beat);
 
+const kick_test = consecutively(list(kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1));
 
+// test_show_function();
 
-// function create_sound_list(encoded) {
-//     display(encoded);
-//     return encoded < t1_spacer 
-//             ? pair(encoded, null)
-//             : pair(encoded % t1_spacer, create_sound_list(math_floor(encoded / t1_spacer)));
-// }
-
-
-
-// const note_encoded_list = create_sound_list(encoded_t1);
-
-// draw_data(note_encoded_list);
-
-// display(length(note_encoded_list));
-// draw_data(note_encoded_list);
-
-
+show_waveform(kick_1);
+play(kick_test);
