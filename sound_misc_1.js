@@ -8,7 +8,6 @@ import {
     make_point, draw_connected_full_view_proportional
 } from "curve";
 
-// make waveform
 function show_waveform(sound) {
     // REDUCE DRAW_FREQ FOR LONG DURATIONS. 
     const dur = get_duration(sound);
