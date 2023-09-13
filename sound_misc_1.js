@@ -2,12 +2,15 @@ import {
     make_sound, get_duration, get_wave, silence_sound, play
 } from "sound";
 
+
+// TEST SUITE //
 import {
     make_point, draw_connected_full_view_proportional
 } from "curve";
 
 // make waveform
 function show_waveform(sound) {
+    // REDUCE DRAW_FREQ FOR LONG DURATIONS. 
     const dur = get_duration(sound);
     const draw_freq = 48000; // standard for most audio formats
     
@@ -17,6 +20,15 @@ function show_waveform(sound) {
     
     draw_connected_full_view_proportional(draw_freq * dur)(waveform_curve);
 }
+
+function kick_sound_1(duration) {
+    const sigmoid = (d, x) => 1 + math_exp(-25 * (x / d - 0.001));
+    const kick_wave = t => math_exp(-3.3 * t / duration)
+                            * math_sin(100 * math_sqrt(t * 2))
+                            * sigmoid(duration, t);
+    return (make_sound(kick_wave, duration));
+}
+// TEST SUITE END // 
 
 
 function sine_sound(freq, duration) {
