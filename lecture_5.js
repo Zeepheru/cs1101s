@@ -32,4 +32,18 @@ function reverse2(xs) {
     return rev(xs, null);
 }
 
-reverse2(list(1, 2, 3, 4, 5));
+// HOF operations on list
+function scale_list(xs, k) {
+    // check lecture notes for typed version! Pretty cool to catch errors. 
+    return is_null(xs)
+            ? null
+            : pair(k * head(xs), scale_list(tail(xs), k));
+}
+
+function apply_func(xs, f) {
+    return is_null(xs)
+            ? null
+            : pair(f(head(xs)), apply_func(tail(xs), f));
+}
+
+apply_func(list(1, 2, 3, 4, 5), x => x * 10);
