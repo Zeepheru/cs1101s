@@ -41,10 +41,52 @@ function scale_list(xs, k) {
 }
 
 // element mapping. 
-function apply_func(xs, f) {
+function map(f, xs) {
     return is_null(xs)
             ? null
-            : pair(f(head(xs)), apply_func(tail(xs), f));
+            : pair(f(head(xs)), map(tail(xs), f));
 }
 
-apply_func(list(1, 2, 3, 4, 5), x => x * 10);
+function copy(xs) {
+    return map(x => x, xs);
+}
+
+function filter(cond, xs) {
+    return is_null(xs)
+            ? null
+            : cond(head(xs))
+            ? pair(head(xs), filter(cond, tail(xs)))
+            : filter(cond, tail(xs));
+}
+
+// and accumulate/reduce. Pretty straightforward, not going to put here
+
+
+// map(x => x * x, list(1, 2, 3, 4));
+// filter(x => x % 2 === 0, list(1, 2, 3, 4, 5, 6, 7, 8, 9));
+
+
+// TREE OPS
+function count_data_items(tree) {
+    return is_null(tree)
+            ? 0
+            : ( is_list(head(tree))
+                ? count_data_items(head(tree))
+                : 1 )
+                + 
+                count_data_items(tail(tree));
+            
+}
+
+function scale_tree(tree, k) {
+    return map(sub_tree => 
+                    !is_list(sub_tree)
+                    ? k * sub_tree
+                    : scale_tree(sub_tree, K),
+            tree);
+            
+}
+// AND A CORRESPONDING MAP FUNC
+
+
+count_data_items(list(list(1, 2), null, 3, list(4, null)));
