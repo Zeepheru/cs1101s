@@ -40,6 +40,7 @@ function scale_list(xs, k) {
             : pair(k * head(xs), scale_list(tail(xs), k));
 }
 
+// element mapping. 
 function apply_func(xs, f) {
     return is_null(xs)
             ? null
