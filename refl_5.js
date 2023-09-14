@@ -1,11 +1,11 @@
 // Reflection 5
 const LoL = list(list(1, 2), list(3, 4, 5, 6), null, list(7, 8, 9));
 
-function flatten_list(xs) {
-    return accumulate(append, null, xs);
-}
+// function flatten_list(xs) {
+//     return accumulate(append, null, xs);
+// }
 
-flatten_list(LoL);
+// flatten_list(LoL);
 
 
 const my_tree = list(1, list(2, list(3, 4), 5), list(6, 7));
@@ -22,6 +22,14 @@ function tree_sum(tree) {
 }
 
 tree_sum(my_tree);
+
+// putting it here
+function accumulate(op, initial, xs) {
+    draw_data(xs);
+    return is_null(xs) 
+            ? initial
+            : op(head(xs), accumulate(op, initial, tail(xs)));
+}
 
 // accumulate_tree
 function accumulate_tree(f, op, initial, tree) {
