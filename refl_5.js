@@ -42,6 +42,7 @@ function accumulate_tree(f, op, initial, tree) {
     
 }
 
+// calling accumulate_tree
 function tree_sum_acc(tree) {
     return accumulate_tree(x => x, (x, y) => x + y, 0, tree);
 }
