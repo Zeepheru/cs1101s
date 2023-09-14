@@ -49,6 +49,7 @@ function accumulate_tree_process(f, op, initial, tree) {
 }
 
 function accumulate_tree(f, op, initial, tree) {
+    // curr and wish instead of (x, y) eh
     return accumulate(
                     (x, y) => op(is_list(x) 
                             ? accumulate_tree(f, op, initial, x) 
