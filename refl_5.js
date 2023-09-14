@@ -25,13 +25,15 @@ function tree_sum(tree) {
 function tree_sum_ifelse(tree) {
     if (is_null(tree)) {
         return 0;
-    } else if (0) {
+    } else {
+        return "ble";
         // oh wait nvm lol
         // note that the tail is by def another tree, so don't need to check
         /*
         alternative checks you could use to reduce runtime, since is_list is O(n)
         (depending on the datatypes)
-        is_pair (doesn't check for null); is_number (for trees/lists of numbers only)
+        - is_pair (doesn't check for null)
+        - is_number (for trees/lists of numbers only)
         */
     }
 }
@@ -58,13 +60,24 @@ function accumulate_tree(f, op, initial, tree) {
     
 }
 
+// better
+function accumulate_tree_better(f, op, initial, tree) {
+    // better making use of the wishful thinking framework
+    return accumulate(
+                    (x, y) => is_list(x) 
+                            ? op( accumulate_tree(f, op, initial, x), y) 
+                            : op(f(x), y), 
+                    initial, tree);
+    
+}
+
 // calling accumulate_tree
 function tree_sum_acc(tree) {
-    return accumulate_tree(x => x, (x, y) => x + y, 0, tree);
+    return accumulate_tree_better(x => x, (x, y) => x + y, 0, tree);
 }
 
 function flatten(tree) {
-    return accumulate_tree(x => list(x), append, null, tree);
+    return accumulate_tree_better(x => list(x), append, null, tree);
 }
 
 const tree_1 = list(list(1, 2), 3);
