@@ -47,10 +47,6 @@ function map(f, xs) {
             : pair(f(head(xs)), map(tail(xs), f));
 }
 
-function copy(xs) {
-    return map(x => x, xs);
-}
-
 function filter(cond, xs) {
     return is_null(xs)
             ? null
@@ -59,8 +55,18 @@ function filter(cond, xs) {
             : filter(cond, tail(xs));
 }
 
-// and accumulate/reduce. Pretty straightforward, not going to put here
+// and accumulate/reduce. Pretty straightforward:
+function accumulate(op, initial, xs) {
+    return is_null(xs) 
+            ? initial
+            : op(head(xs), accumulate(op, initial, tail(xs)));
+}
+////
 
+
+function copy(xs) {
+    return map(x => x, xs);
+}
 
 // map(x => x * x, list(1, 2, 3, 4));
 // filter(x => x % 2 === 0, list(1, 2, 3, 4, 5, 6, 7, 8, 9));
