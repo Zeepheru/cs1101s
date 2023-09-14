@@ -21,6 +21,21 @@ function tree_sum(tree) {
                 tree_sum(tail(tree));
 }
 
+// alternatively using if else - clearer imo
+function tree_sum_ifelse(tree) {
+    if (is_null(tree)) {
+        return 0;
+    } else if (0) {
+        // oh wait nvm lol
+        // note that the tail is by def another tree, so don't need to check
+        /*
+        alternative checks you could use to reduce runtime, since is_list is O(n)
+        (depending on the datatypes)
+        is_pair (doesn't check for null); is_number (for trees/lists of numbers only)
+        */
+    }
+}
+
 tree_sum(my_tree);
 
 // accumulate_tree
