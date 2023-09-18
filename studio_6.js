@@ -32,11 +32,11 @@ function makeup_amount(x, coins) {
         // Combinations that do not use the head coin
         // for the remaining amount
         // I do not understand...
-        // const combi_B = makeup_amount(x, tail(coins));
+        // OHHHH IT WORKS LIKE THIS
+        const combi_B = makeup_amount(x - head(coins), tail(coins));
         
         // Combinations that use the head coin
-        const combi_C = map(wish => pair(head(coins), wish),
-                            makeup_amount(x - head(coins), tail(coins)));
+        const combi_C = map(wish => pair(head(coins), wish), combi_B);
         
         return append(combi_A, combi_C);
     }
