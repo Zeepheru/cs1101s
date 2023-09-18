@@ -32,7 +32,7 @@ function makeup_amount(x, coins) {
         // Combinations that do not use the head coin
         // for the remaining amount
         // I do not understand...
-        // OHHHH IT WORKS LIKE THIS
+        // OHHHH IT WORKS LIKE THIS, yeah it is kinda redundant
         const combi_B = makeup_amount(x - head(coins), tail(coins));
         
         // Combinations that use the head coin
