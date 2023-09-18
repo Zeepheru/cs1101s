@@ -111,6 +111,50 @@ function cymbal_sound_3(duration) {
     
     return adsr(0.02, 0, 0.8, 0.1)(make_sound(wave, duration));
 }
+
+// TRY OUT SOME NEW WAVES
+
+function clean_tone(freq, duration) {
+    const wave = t => math_exp(-1 * t / duration)
+                * ( math_sin(freq * t) 
+                    + 1/5 * math_sin(freq * 2 * t)
+                    + 1/4 * math_sin(freq * 3 * t)
+                    + 1/3 * math_sin(freq * 4 * t)
+                    + 1/2 * math_sin(freq * 5 * t)
+                    + 1/3 * math_sin(freq * 6 * t)
+                    + 1/4 * math_sin(freq * 7 * t)
+                    + 1/6 * math_sin(freq * 8 * t)
+                    );
+                    
+    const base_sound = make_sound(wave, duration);
+    
+    return adsr(0.05, 0.9, 0, 0.1)(base_sound);
+}
+
+function dist_tone(freq, duration) {
+    const main_freqs = t =>  ( math_sin(freq * t) 
+                    + 1/2 * math_sin(freq * 2 * t)
+                    + 1/4 * math_sin(freq * 3 * t)
+                    + 1/3 * math_sin(freq * 4 * t)
+                    );
+                    
+    const clipped = t => math_max(-1, math_min(1, main_freqs(t) * 1)) * 1.1;
+    
+    // const wave = t => math_exp(-t / duration) * clipped(t);
+    const wave = clipped;
+                    
+    const base_sound = make_sound(wave, duration);
+    
+    // return adsr(0.05, 0.9, 0, 0.1)(base_sound);
+    return adsr(0.1, 0.3, 0.4, 0.2)(base_sound);
+}
+
+const test_note = dist_tone(440, beat);
+
+show_waveform(test_note);
+play(test_note);
+
+///
  
 const kick_1 = kick_sound_1(note_8th);
 const double_kick_metal = kick_sound_1(note_32nd);
@@ -177,9 +221,12 @@ function generate_sound_t1(encoded_0) {
     return sound_func(note_freq, duration);
 }
 
+// SOUND TESTS //
+
 // const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_megalovania_riff));
 // play(simultaneously(list(drum_test, consecutively(list(test_sound, test_sound)))));
 
 
-const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_rickroll));
-play(simultaneously(list(drum_test, test_sound)));
+// const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_rickroll));
+// play(simultaneously(list(drum_test, test_sound)));
+
