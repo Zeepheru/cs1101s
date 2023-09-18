@@ -16,8 +16,8 @@ function remove_duplicates(lst) {
                 null, lst);
 }
 
-remove_duplicates(list(1, 2, 3, 4, 4, 3, 2, 1, 2));
-remove_duplicates(list("a", "x", "b", "c", "c", "b", "d"));
+display_list(remove_duplicates(list(1, 2, 3, 4, 4, 3, 2, 1, 2)));
+display_list(remove_duplicates(list("a", "x", "b", "c", "c", "b", "d")));
 
 // Q3
 function makeup_amount(x, coins) {
