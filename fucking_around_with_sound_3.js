@@ -115,7 +115,7 @@ function cymbal_sound_3(duration) {
 // TRY OUT SOME NEW WAVES
 
 function clean_tone(freq, duration) {
-    const wave = t => math_exp(-1 * t / duration)
+    const wave = t => math_exp(-0.6 * t / duration)
                 * ( math_sin(freq * t) 
                     + 1/2 * math_sin(freq * 2 * t)
                     + 1/2.2 * math_sin(freq * 3 * t)
@@ -132,7 +132,7 @@ function clean_tone(freq, duration) {
                     
     const base_sound = make_sound(wave, duration);
     
-    return adsr(0.05, 0.9, 0, 0.1)(base_sound);
+    return adsr(0.02, 0.9, 0, 0.1)(base_sound);
 }
 
 function clean_tone2(freq, duration) {
