@@ -170,7 +170,7 @@ function dist_tone(freq, duration) {
     // return adsr(0.1, 0.3, 0.4, 0.2)(base_sound);
 }
 
-const test_note = clean_tone(440, beat);
+const test_note = clean_tone(440, beat * 2);
 
 show_waveform(test_note);
 play(test_note);
