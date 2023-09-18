@@ -117,13 +117,34 @@ function cymbal_sound_3(duration) {
 function clean_tone(freq, duration) {
     const wave = t => math_exp(-1 * t / duration)
                 * ( math_sin(freq * t) 
+                    + 1/2 * math_sin(freq * 2 * t)
+                    + 1/2.2 * math_sin(freq * 3 * t)
+                    + 1/3 * math_sin(freq * 4 * t)
+                    + 1/4 * math_sin(freq * 5 * t)
+                    + 1/4.4 * math_sin(freq * 6 * t)
+                    + 1/4.7 * math_sin(freq * 7 * t)
+                    + 1/5 * math_sin(freq * 8 * t)
+                    + 1/5 * math_sin(freq * 9 * t)
+                    + 1/5 * math_sin(freq * 10 * t)
+                    + 1/5 * math_sin(freq * 11 * t)
+                    + 1/7 * math_sin(freq * 12 * t)
+                    );
+                    
+    const base_sound = make_sound(wave, duration);
+    
+    return adsr(0.05, 0.9, 0, 0.1)(base_sound);
+}
+
+function clean_tone2(freq, duration) {
+    const wave = t => math_exp(-1 * t / duration)
+                * ( math_sin(freq * t) 
                     + 1/5 * math_sin(freq * 2 * t)
                     + 1/4 * math_sin(freq * 3 * t)
                     + 1/3 * math_sin(freq * 4 * t)
                     + 1/2 * math_sin(freq * 5 * t)
-                    + 1/3 * math_sin(freq * 6 * t)
-                    + 1/4 * math_sin(freq * 7 * t)
-                    + 1/6 * math_sin(freq * 8 * t)
+                    + 1/2.4 * math_sin(freq * 6 * t)
+                    + 1/2.7 * math_sin(freq * 7 * t)
+                    + 1/3 * math_sin(freq * 8 * t)
                     );
                     
     const base_sound = make_sound(wave, duration);
@@ -140,16 +161,16 @@ function dist_tone(freq, duration) {
                     
     const clipped = t => math_max(-1, math_min(1, main_freqs(t) * 1)) * 1.1;
     
-    // const wave = t => math_exp(-t / duration) * clipped(t);
-    const wave = clipped;
+    const wave = t => math_exp(-t / duration) * clipped(t);
+    // const wave = clipped;
                     
     const base_sound = make_sound(wave, duration);
     
-    // return adsr(0.05, 0.9, 0, 0.1)(base_sound);
-    return adsr(0.1, 0.3, 0.4, 0.2)(base_sound);
+    return adsr(0.05, 0.9, 0, 0.1)(base_sound);
+    // return adsr(0.1, 0.3, 0.4, 0.2)(base_sound);
 }
 
-const test_note = dist_tone(440, beat);
+const test_note = clean_tone(440, beat);
 
 show_waveform(test_note);
 play(test_note);
