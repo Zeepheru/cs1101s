@@ -139,6 +139,7 @@ function deriv_symbolic(exp, x) {
 }
 
 // required funcs!
+// constructor; accessor/selector; predicates
 function make_sum(a1, a2) {
     //  w/ simplifications!
     return number_equal(a1, 0)
