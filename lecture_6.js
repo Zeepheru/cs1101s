@@ -1,9 +1,9 @@
 // Lecture 6
 
-const N = 100;
 
+// BINARY SEARCH; BST!
+const N = 100;
 function guess_secret_num(start, end) {
-    // BINARY SEARCH!
     // O(log n) => since max of k calls for N = 2^k
     
     if (start === end) {
@@ -20,3 +20,4 @@ function guess_secret_num(start, end) {
 }
 // guess_secret_num(1, N);
 
+//  -----------------------------------------
