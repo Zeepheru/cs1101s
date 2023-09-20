@@ -67,8 +67,8 @@ function merge_sort(xs) {
             return x0 < y0
                 ? pair(x0, merge(tail(xs), ys))
                 : pair(y0, merge(xs, tail(ys)));
-            }
         }
+    }
     function middle(n) {
         return math_floor(n / 2);
     } 
@@ -101,9 +101,10 @@ const sort_this = insertion_sort;
 //  -----------------------------------------
 
 // SYMBOLIC REPRESENTATION //
-const my_exp = make_sum(make_product("x", "x"), make_sum*("x", 4));
+const my_exp = make_sum(make_product("x", "x"), make_sum("x", 4));
 
 function eval_symbolic(exp, name, val) {
+    // lots of assumed functions to exist here
     return is_number(exp) 
             ? exp
             : is_variable(exp)
@@ -111,5 +112,14 @@ function eval_symbolic(exp, name, val) {
             : is_sum(exp)
             ? eval_symbolic(addend(exp), name, val) + 
                 eval_symbolic(augend(exp), name, val)
+            : is_product(exp)
+            ? eval_symbolic(addend(exp), name, val) * 
+                eval_symbolic(augend(exp), name, val)
+            : error(exp, "unkown expression type");
 }
+
+
+
+// eval_symbolic(my_exp, "x", 3);
+
 
