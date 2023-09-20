@@ -101,6 +101,9 @@ const sort_this = insertion_sort;
 //  -----------------------------------------
 
 // SYMBOLIC REPRESENTATION //
+/*
+Just check the slides and show in playground
+*/
 const my_exp = make_sum(make_product("x", "x"), make_sum("x", 4));
 
 function eval_symbolic(exp, name, val) {
@@ -118,8 +121,63 @@ function eval_symbolic(exp, name, val) {
             : error(exp, "unkown expression type");
 }
 
+function deriv_symbolic(exp, x) {
+    return is_number(exp)
+            ? 0
+            : is_variable(exp)
+            ? (is_same_variable(exp, x) ? 1 : 0)
+            : is_sum(exp)
+            ? make_sum(deriv_symbolic(addend(exp), x),
+                        deriv_symbolic(augend(exp), x))
+            : is_product(exp)
+            ? make_sum(make_product(multiplier(exp),
+                            deriv_symbolic(multiplicand(exp),x)),
+                        make_product(
+                            deriv_symbolic(multiplier(exp), x),
+                            multiplicant(exp)))
+            : error(exp, "unkown expression type");
+}
 
+// required funcs!
+function make_sum(a, b) {
+    return list("+", a, b);
+}
 
+function make_product(a, b) {
+    return list("*", a, b);
+}
+
+function addend(s) {
+    return head(tail(s));
+}
+
+function augend(s) {
+    return head(tail(tail(s)));
+}
+
+function multiplier(s) {
+    return head(tail(s));
+}
+
+function multiplicand(s) {
+    return head(tail(tail(s)));
+}
+
+function is_variable(x) {
+    return is_string(x);
+}
+
+function is_same_variable(v1, v2) {
+    return is_variable(v1) && is_variable(v2) && v1 === v2;
+}
+
+function is_sum(x) {
+    return is_pair(x) && head(X) === "+";
+}
+
+function is_product(x) {
+    return is_pair(x) && head(X) === "*";
+}
 // eval_symbolic(my_exp, "x", 3);
 
 
