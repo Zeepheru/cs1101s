@@ -139,12 +139,29 @@ function deriv_symbolic(exp, x) {
 }
 
 // required funcs!
-function make_sum(a, b) {
-    return list("+", a, b);
+function make_sum(a1, a2) {
+    //  w/ simplifications!
+    return number_equal(a1, 0)
+            ? a2
+            : number_equal(a2, 0)
+            ? a1
+            : is_number(a1) && is_number(a2)
+            ? a1 + a2
+            : is_variable(a1) && is_variable(a2) && is_same_variable(a1, a2)
+            ? list("*", 2, a1)
+            : list("+", a1, a2);
 }
 
-function make_product(a, b) {
-    return list("*", a, b);
+function make_product(m1, m2) {
+    return number_equal(m1, 0) || number_equal(m2, 0)
+            ? 0
+            : number_equal(m1, 1)
+            ? m2
+            : number_equal(m2, 1)
+            ? m1
+            : is_number(m1) && is_number(m2)
+            ? m1 * m2
+            : list("*", m1, m2);
 }
 
 function addend(s) {
