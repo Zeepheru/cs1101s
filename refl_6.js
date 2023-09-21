@@ -31,7 +31,8 @@ I presume merge() is Theta(n)
 Since it's effectively 2n by running through both lists
 
 
-
+As for merge_sort(), O (n log n)? 
+Though to be fair, I am aware that the better sorting algos do have n log n.
 
 
 */
