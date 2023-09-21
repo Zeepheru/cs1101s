@@ -2,6 +2,7 @@
 
 // Q1
 function insert_cmp(x, xs, cmp) {
+    // cmp: comparator
     return is_null(xs)
             ? list(x)
             : cmp(x, head(xs))
@@ -23,7 +24,7 @@ display_list(insertion_sort_cmp(xs, (x, y) => x < y));
 display_list(insertion_sort_cmp(xs, (x, y) => x > y));
 display_list(insertion_sort_cmp(xs, (x, y) => false));
 
-// wishful thinking really does help for the one below
+// wishful thinking really does help for the one below :)))
 display_list(insertion_sort_cmp(xs, 
                                 (x, y) => 
                                         x % 2 === 0 && y % 2 === 0 
@@ -37,6 +38,10 @@ display_list(insertion_sort_cmp(xs,
 // Q2
 
 /*
+yes, the specifics when it comes to order of growth terminology (when u wanna be 
+accurate) is worth noting. 
+
+
 I presume merge() is Theta(n)
 Since it's effectively 2n by running through both lists
 
