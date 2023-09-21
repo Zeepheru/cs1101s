@@ -27,7 +27,8 @@ display_list(insertion_sort_cmp(xs, (x, y) => x % 2 === 0 ? x < y : x > y));
 // Q2
 
 /*
-
+I presume merge() is Theta(n)
+Since it's effectively 2n by running through both lists
 
 
 
