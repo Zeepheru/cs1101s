@@ -18,4 +18,6 @@ function insertion_sort_cmp(xs, cmp) {
 
 const xs = list(6, 3, 8, 5, 1, 9, 6, 4, 2, 7);
 
-display_list(insertion_sort_cmp(xs, (x, y) => ));
+display_list(insertion_sort_cmp(
+                            xs, 
+                            (x, y) => x < y ? x : y));
