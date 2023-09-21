@@ -45,10 +45,14 @@ accurate) is worth noting.
 
 I presume merge() is Theta(n)
 Since it's effectively 2n by running through both lists
+(yes, but n would refer to the length of the resultant list?)
 
 
 As for merge_sort(), O (n log n)? 
 Though to be fair, I am aware that the better sorting algos do have n log n.
 
+Yes, but it's actually Theta(n log(n)) 
+- can chcek by drawing a merge_sort() call tree and count the ops 
+and n for each 
 
 */
