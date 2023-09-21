@@ -55,4 +55,7 @@ Yes, but it's actually Theta(n log(n))
 - can chcek by drawing a merge_sort() call tree and count the ops 
 and n for each 
 
+
+
+TL;DR, analysing the helper functions' runtimes
 */
