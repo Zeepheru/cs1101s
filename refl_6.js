@@ -22,7 +22,17 @@ const xs = list(6, 3, 8, 5, 1, 9, 6, 4, 2, 7);
 display_list(insertion_sort_cmp(xs, (x, y) => x < y));
 display_list(insertion_sort_cmp(xs, (x, y) => x > y));
 display_list(insertion_sort_cmp(xs, (x, y) => false));
-display_list(insertion_sort_cmp(xs, (x, y) => x % 2 === 0 ? y > x : y < x));
+
+// wishful thinking really does help for the one below
+display_list(insertion_sort_cmp(xs, 
+                                (x, y) => 
+                                        x % 2 === 0 && y % 2 === 0 
+                                        ? x < y
+                                        : x % 2 === 0 && y % 2 !== 0
+                                        ? true
+                                        : y % 2 === 0 && x % 2 !== 0
+                                        ? false
+                                        : y < x));
 
 // Q2
 
