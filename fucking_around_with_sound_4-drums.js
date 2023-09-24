@@ -17,7 +17,7 @@ import {
 function show_waveform(sound) {
     // DO NOT USE WITH LONG DURATIONS. IT WILL COMPLETELY HANG.
     const dur = get_duration(sound);
-    const draw_freq = 2000; // standard for most audio formats
+    const draw_freq = 6000; // standard for most audio formats
     
     const wave = t => get_wave(sound)(t);
     
@@ -142,28 +142,6 @@ function cymbal_sound_rings(dur) {
     return adsr(0.01, 0.3, 0.8, 0.2)(make_sound(wave, duration));
 }
 
-// FOR THY INTRO
-/*
-160 Hz to 90 Hz or so drop (1000 -> 550)
-
-*/
-
-function introdrum1(duration) {
-     
-    const wave = t => math_exp(-2 * t / duration) * 
-                            (math_sin(1000 * math_sqrt(t * 2)) - 0.073 * math_cos(2000 * math_sqrt(t)));
-    return make_sound(wave, duration);
-}
-
-const id1 = introdrum1(beat);
-
-
-show_waveform(id1);
-play(id1);
-
-
-
-
 // test overlapping
 function overlap_consec(list_of_sounds) {
     const total_length = length(list_of_sounds);
@@ -214,6 +192,50 @@ function overlap_consec_times(list_of_sounds, times) {
 
 
 ///
+
+// FOR THY INTRO
+/*
+160 Hz to 90 Hz or so drop (1000 -> 550)
+
+*/
+
+function introdrum1(duration) {
+    const noise = t => get_wave(noise_sound(duration))(t);
+     
+    const wave = t => math_exp(-2 * t / duration) * (
+                            (math_sin(145 * math_sqrt(t * 5)) 
+                            - 0.073 * math_cos(200 * math_sqrt(t))
+                            - 0.2 * noise(t)
+                            ));
+    return adsr(0.01, 0.3, 0.8, 0.2)(make_sound(wave, duration));
+}
+
+function introdrum1(duration) {
+    const noise = t => get_wave(noise_sound(duration))(t);
+    const frequency = t => 1100 - t * (2 * );
+     
+    const wave = t => math_exp(-2 * t / duration) * (
+                            (math_sin(frequency * t) 
+                            - 0.073 * math_cos(2 * frequency * t)
+                            - 0.2 * noise(t)
+                            ));
+    return adsr(0.01, 0.3, 0.8, 0.2)(make_sound(wave, duration));
+}
+
+const id1 = introdrum1(note_8th);
+
+const test_intro = overlap_consec_times(
+                            list(id1, id1, id1, id1, id1, id1, id1, id1, id1), 
+                            list(note_16th, note_8th, note_16th, note_16th,
+                                note_16th, note_16th, note_16th, note_16th, note_16th, note_16th));
+
+show_waveform(test_intro);
+play(test_intro);
+
+
+
+
+
  
 const kick_1 = kick_sound_1(beat);
 
