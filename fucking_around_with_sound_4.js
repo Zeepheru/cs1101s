@@ -3,7 +3,7 @@ import {
     consecutively, simultaneously,
     letter_name_to_frequency, midi_note_to_frequency,
     square_sound, silence_sound, sawtooth_sound, sine_sound, triangle_sound,
-    noise_sound, adsr, violin
+    noise_sound, adsr, violin,
     get_duration, get_wave
 } from "sound";
 
@@ -114,16 +114,16 @@ function cymbal_sound_3(duration) {
 // TRY OUT SOME NEW WAVES
 
 function synth_strings(note, freq, duration) {
+    display(note);
+    display(freq);
     // adsr(0.1, 0.3, 0.4, 0.2)(simultaneously(list(sine_sound(freq, duration), sine_sound(freq * 2, duration))))
-    // const wave = t => math_exp(-0.6 * t / duration)
-    //             * ( math_sin(freq * t) );
+    const wave = t => ( math_sin(freq * t * 2 * math_PI) );
                     
-    // const base_sound = make_sound(wave, duration);
+    const base_sound = make_sound(wave, duration);
     
-    
-    
-    
-    return adsr(0.01, 0.9, 0, 0.1)(violin(note, duration));
+
+    // return adsr(0.01, 0.9, 0, 0.1)(violin(note, duration));
+    return adsr(0.01, 0.9, 0, 0.1)(base_sound);
 }
 
 
