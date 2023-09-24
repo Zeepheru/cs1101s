@@ -114,14 +114,14 @@ function synth_strings(note, f, duration) {
     const nfreq = freq * 1.008;
     
     const wave = t => (
-                    0.891 * math_sin(freq * t * 1) + 
+                    0.791 * math_sin(freq * t * 1) + 
                     0.920 * math_sin(freq * t * 2) + 
                     0.635 * math_sin(freq * t * 3) + 
-                    0.800 * math_sin(freq * t * 4) + 
+                    0.900 * math_sin(freq * t * 4) + 
                     0.368 * math_sin(freq * t * 5)
                     ) / 7 + (
-                    0.891 * math_sin(nfreq * t * 1) + 
-                    1.000 * math_sin(nfreq * t * 2)
+                    0.891 * math_sin(nfreq * t * 2) + 
+                    1.000 * math_sin(nfreq * t * 3)
                     ) / 16
                     ;
                     
@@ -130,7 +130,7 @@ function synth_strings(note, f, duration) {
 
     // return adsr(0.01, 0.9, 0, 0.1)(violin(note, duration));
     // return base_sound;
-    return adsr(0.2, 0, 0.8, 0.4)(base_sound); 
+    return adsr(0.3, 0, 0.8, 0.4)(base_sound); 
 }
 
 function synth_strings_v0(note, f, duration) {
