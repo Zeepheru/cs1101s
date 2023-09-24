@@ -156,19 +156,20 @@ function synth_strings(note, f, duration) {
 function overlap_consec(list_of_sounds) {
     const total_length = length(list_of_sounds);
     
-    function perc_helper(current_n, last_wave, remaining_sounds) {
-        const current_duration = get_duration(last_wave);
-        
-        if (current_n === total_length) {
+    function perc_helper(current_duration, last_wave, remaining_sounds) {
+        if (is_null(remaining_sounds)) {
             return make_sound(last_wave, current_duration);
         } else {
             const current_wave = get_wave(head(remaining_sounds));
+            const current_wave_dur = get_duration(head(remaining_sounds));
         
             const new_wave = t => t < current_duration
                             ? last_wave(t)
-                            : last_wave(t) + current_wave(t - current_duration);
+                            : t < current_duration + current_wave_dur
+                            ? last_wave(t) + current_wave(t - current_duration)
+                            : 0 ;
             
-            return perc_helper(current_n + 1, new_wave, tail(remaining_sounds));
+            return perc_helper(current_duration + current_wave_dur, new_wave, tail(remaining_sounds));
         }
     }
     
