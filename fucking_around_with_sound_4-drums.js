@@ -142,37 +142,23 @@ function cymbal_sound_rings(dur) {
     return adsr(0.01, 0.3, 0.8, 0.2)(make_sound(wave, duration));
 }
 
-// TRY OUT SOME NEW WAVES
+// FOR THY INTRO
+/*
+160 Hz to 90 Hz or so drop (1000 -> 550)
 
-function synth_strings(note, f, duration) {
-    const freq = twopi * f * 2; // times 2 for strings?
-    const nfreq = freq * 1.008;
-    
-    const wave = t => (
-                    0.891 * math_sin(freq * t * 1) + 
-                    1.000 * math_sin(freq * t * 2) + 
-                    0.335 * math_sin(freq * t * 3) + 
-                    0.200 * math_sin(freq * t * 4) + 
-                    0.168 * math_sin(freq * t * 5)
-                    ) / 10 + (
-                    0.891 * math_sin(nfreq * t * 1) + 
-                    1.000 * math_sin(nfreq * t * 2)
-                    ) / 16
-                    ;
-                    
-    const base_sound = make_sound(wave, duration);
-    
+*/
 
-    // return adsr(0.01, 0.9, 0, 0.1)(violin(note, duration));
-    // return base_sound;
-    return adsr(0.2, 0, 0.8, 0.4)(base_sound);
+function introdrum1(duration) {
+     
+    const wave = t => math_exp(-2 * t / duration) * 
+                            (math_sin(1000 * math_sqrt(t * 2)) - 0.073 * math_cos(2000 * math_sqrt(t)));
+    return make_sound(wave, duration);
 }
 
+const id1 = introdrum1(beat);
 
-// const test_note = clean_tone_empirical(220, 6);
+play(id1)
 
-// show_waveform(test_note);
-// play(test_note);
 
 
 
@@ -235,75 +221,31 @@ const hh_closed = cymbal_sound_4(note_8th);
 const hh_open = cymbal_sound_rings(note_8th);
 const snare = snare_v2(note_8th);
 
+
 const tester = tom_perhaps(beat);
 
-// const kick_test = consecutively(list(kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1));
 
 // test_show_function();
 
-// show_waveform(drum1);
-// play(drum1);
+// Main drums test
+// const cymbal_times = list(note_8th, note_16th, note_16th,
+//                             note_8th, note_16th, note_16th,
+//                             note_8th, note_16th, note_16th,
+//                             note_8th, note_16th, note_16th);
+// const cymbals = map((x) => hh_closed, cymbal_times);
+// const cymbal_line = overlap_consec_times(cymbals, cymbal_times);
 
-const d1 = consecutively(list(kick_1, kick_1, snare, rest_8th));
-const d2 = consecutively(list(cym, cym2, cym, cym));
+// const kick_line = overlap_consec_times(list(kick_1, kick_1, kick_1, kick_1), list(beat, beat, beat, beat));
+// const snare_line = overlap_consec_times(list(snare, snare), list(beat +  beat, beat + beat));
 
-const drums = simultaneously(list(d1, d2));
+// const full_drums_bar = simultaneously(list(cymbal_line, kick_line, snare_line));
 
-const drums_x4 = consecutively(list(drums, drums, drums, drums));
-const drum_test = consecutively(list(drums_x4, drums_x4, drums_x4, drums_x4));
-// show_waveform(drums_x4);
+
 
 // DRUM TESTS
-show_waveform(hh_open);
-play(hh_open);
+show_waveform(full_drums_bar);
+play(full_drums_bar);
 
 
 
-
-// try and generate sounds from t1 encoded numbers
-function generate_sound_t1(encoded_0) {
-    function get_freq(note_number) {
-        return note_number === 0
-                ? 0
-                : midi_note_to_frequency(note_number);
-    }
-    const encoded = encoded_0 - 9e8;
-    
-    const dd = encoded % 1000;
-    const nn = ((encoded - dd) / 1000) % 100;
-    const note_number = math_floor((encoded % 1e7) / 1e5) + 21;
-    
-    // Override
-    // const sound_type = 2;
-    const sound_type = math_floor(encoded / 1e7);
-    
-    
-    const duration = bar_duration * nn / dd;
-    
-    const note_freq = get_freq(note_number);
-    
-    // can add chords here
-    const sound_func = sound_type === 1
-                        ? (note, freq, duration) => synth_strings(note, freq, duration * 1.5)
-                        : sound_type === 2
-                        ? (note, freq, duration) => synth_strings(note, freq, duration)
-                        : sound_type === 3
-                        ? (note, freq, duration) => sawtooth_sound(freq, duration)
-                        : sound_type === 4
-                        ? (note, freq, duration) => sine_sound(freq, duration)
-                        : sound_type === 5
-                        ? (note, freq, duration) => square_sound(freq, duration)
-                        : (note, freq, duration) => silence_sound(duration);
-    
-    return sound_func(note_number, note_freq, duration);
-}
-
-// SOUND TESTS //
-
-// const rickroll_melody_soundlist = map(generate_sound_t1, list_encoded_rickroll);
-
-// // const test_sound = consecutively(rickroll_melody_soundlist);
-// const test_sound = overlap_consec(rickroll_melody_soundlist);
-// play(test_sound);
-// show_waveform(test_sound);
 
