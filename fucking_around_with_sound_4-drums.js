@@ -17,7 +17,7 @@ import {
 function show_waveform(sound) {
     // DO NOT USE WITH LONG DURATIONS. IT WILL COMPLETELY HANG.
     const dur = get_duration(sound);
-    const draw_freq = 1000; // standard for most audio formats
+    const draw_freq = 2000; // standard for most audio formats
     
     const wave = t => get_wave(sound)(t);
     
@@ -73,14 +73,30 @@ function some_other_drum(duration) {
     return make_sound(wave, duration);
 }
 
+function tom_perhaps(duration) {
+    const noise = t => get_wave(noise_sound(duration))(t);
+     
+    const wave = t => (math_exp(-2 * t / duration) 
+                            * (math_sin(545.1 * t) + math_sin(843.1 * t)  + math_sin(1012.3 * t)) / 2);
+    return adsr(0,0,1,0.3)(make_sound(wave, duration));
+}
+
 function snare_perhaps(duration) {
     const noise = t => get_wave(noise_sound(duration))(t);
      
     const wave = t => math_exp(-4 * t / duration) * (math_exp(-5 * t / duration) 
                             * (math_sin(160 * math_sqrt(t * 2)))
-                            - (noise(t)));
+                            - 0.05 * (noise(t)));
     return (make_sound(wave, duration));
 }
+
+function snare_v2(duration) {
+    const noise = t => get_wave(noise_sound(duration))(t);
+     
+    const wave = t => math_exp(-4 * t / duration) * (noise(t) - 1 * (math_sin(120 * twopi * t)));
+    return adsr(0,0,1,0.3)(make_sound(wave, duration));
+}
+
 
 function cymbal_sound_1(duration) {
     const noise = t => get_wave(noise_sound(duration))(t);
@@ -105,6 +121,14 @@ function cymbal_sound_3(duration) {
     const wave = t => math_exp(-15 * t / duration) * (noise(t));
     
     return adsr(0.02, 0, 0.8, 0.1)(make_sound(wave, duration));
+}
+
+function cymbal_sound_4(duration) {
+    const noise = t => get_wave(noise_sound(duration))(t);
+    
+    const wave = t => math_exp(-15 * t / duration) * (noise(t));
+    
+    return (make_sound(wave, duration));
 }
 
 // TRY OUT SOME NEW WAVES
@@ -165,7 +189,7 @@ function overlap_consec(list_of_sounds) {
     return perc_helper(0, t => 0, list_of_sounds);
 }
 
-function overlap_consec(list_of_sounds, times) {
+function overlap_consec_times(list_of_sounds, times) {
     // time - each note's actual time
     // const total_length = length(list_of_sounds);
     
@@ -196,7 +220,10 @@ const kick_1 = kick_sound_1(beat);
 
 const cym = cymbal_sound_3(beat);
 const cym2 = cymbal_sound_2(beat);
-const snare = snare_perhaps(beat);
+const cym4 = cymbal_sound_2(note_8th);
+const snare = snare_v2(note_8th);
+
+const tester = tom_perhaps(beat);
 
 // const kick_test = consecutively(list(kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1));
 
@@ -215,8 +242,8 @@ const drum_test = consecutively(list(drums_x4, drums_x4, drums_x4, drums_x4));
 // show_waveform(drums_x4);
 
 // DRUM TESTS
-
-play(kick_1);
+show_waveform(cym4);
+play(cym4);
 
 
 
