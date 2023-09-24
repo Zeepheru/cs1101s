@@ -165,6 +165,30 @@ function overlap_consec(list_of_sounds) {
     return perc_helper(0, t => 0, list_of_sounds);
 }
 
+function overlap_consec(list_of_sounds, times) {
+    // time - each note's actual time
+    // const total_length = length(list_of_sounds);
+    
+    function perc_helper(current_duration, last_wave, remaining_sounds, times) {
+        if (is_null(remaining_sounds)) {
+            return make_sound(last_wave, current_duration);
+        } else {
+            const current_wave = get_wave(head(remaining_sounds));
+            const current_wave_dur = get_duration(head(remaining_sounds));
+        
+            const new_wave = t => t < current_duration
+                            ? last_wave(t)
+                            : t < current_duration + current_wave_dur
+                            ? last_wave(t) + current_wave(t - current_duration)
+                            : 0 ;
+            
+            return perc_helper(current_duration + head(times), new_wave, tail(remaining_sounds), tail(times));
+        }
+    }
+    
+    return perc_helper(0, t => 0, list_of_sounds, times);
+}
+
 
 ///
  
@@ -192,7 +216,7 @@ const drum_test = consecutively(list(drums_x4, drums_x4, drums_x4, drums_x4));
 
 // DRUM TESTS
 
-
+play(kick_1);
 
 
 
