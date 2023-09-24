@@ -204,8 +204,6 @@ const drum_test = consecutively(list(drums_x4, drums_x4, drums_x4, drums_x4));
 
 // try and generate sounds from t1 encoded numbers
 function generate_sound_t1(encoded_0) {
-    
-    
     function get_freq(note_number) {
         return note_number === 0
                 ? 0
@@ -221,10 +219,6 @@ function generate_sound_t1(encoded_0) {
     const sound_type = 2;
     // const sound_type = math_floor(encoded / 1e7);
     
-    // display(dd);
-    // display(nn);
-    // display(note_number);
-    // display(nn/dd);
     
     const duration = bar_duration * nn / dd;
     
