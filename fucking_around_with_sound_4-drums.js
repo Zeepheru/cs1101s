@@ -192,11 +192,11 @@ function overlap_consec(list_of_sounds, times) {
 
 ///
  
-const kick_1 = kick_sound_1(note_8th);
+const kick_1 = kick_sound_1(beat);
 
-const cym = cymbal_sound_3(note_8th);
-const cym2 = cymbal_sound_2(note_8th);
-const snare = snare_perhaps(note_8th);
+const cym = cymbal_sound_3(beat);
+const cym2 = cymbal_sound_2(beat);
+const snare = snare_perhaps(beat);
 
 // const kick_test = consecutively(list(kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1));
 
