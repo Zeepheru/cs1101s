@@ -190,6 +190,11 @@ const drums_x4 = consecutively(list(drums, drums, drums, drums));
 const drum_test = consecutively(list(drums_x4, drums_x4, drums_x4, drums_x4));
 // show_waveform(drums_x4);
 
+// DRUM TESTS
+
+
+
+
 
 
 // try and generate sounds from t1 encoded numbers
@@ -232,10 +237,10 @@ function generate_sound_t1(encoded_0) {
 
 // SOUND TESTS //
 
-const rickroll_melody_soundlist = map(generate_sound_t1, list_encoded_rickroll);
+// const rickroll_melody_soundlist = map(generate_sound_t1, list_encoded_rickroll);
 
-// const test_sound = consecutively(rickroll_melody_soundlist);
-const test_sound = overlap_consec(rickroll_melody_soundlist);
-play(test_sound);
-show_waveform(test_sound);
+// // const test_sound = consecutively(rickroll_melody_soundlist);
+// const test_sound = overlap_consec(rickroll_melody_soundlist);
+// play(test_sound);
+// show_waveform(test_sound);
 
