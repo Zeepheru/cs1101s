@@ -55,6 +55,8 @@ const rest_16th = silence_sound(note_16th);
 const rest_8th = silence_sound(note_8th);
 const rest_beat = silence_sound(beat);
 
+const twopi = 2 * math_PI;
+
 
 // ok lets try to make a sound reminiscent of a kick\
 function sigmoid(d, x) {
@@ -113,11 +115,20 @@ function cymbal_sound_3(duration) {
 
 // TRY OUT SOME NEW WAVES
 
-function synth_strings(note, freq, duration) {
+function synth_strings(note, f, duration) {
     display(note);
     display(freq);
+    const freq = twopi * f * 2; // times 2 for strings?
     // adsr(0.1, 0.3, 0.4, 0.2)(simultaneously(list(sine_sound(freq, duration), sine_sound(freq * 2, duration))))
-    const wave = t => ( math_sin(freq * t * 2 * math_PI) );
+    
+    
+    const wave = t => (
+                    0.891 * math_sin(freq * t * 1) + 
+                    1.000 * math_sin(freq * t * 2) + 
+                    0.335 * math_sin(freq * t * 3) + 
+                    0.200 * math_sin(freq * t * 4) + 
+                    0.168 * math_sin(freq * t * 5)
+                    );
                     
     const base_sound = make_sound(wave, duration);
     
