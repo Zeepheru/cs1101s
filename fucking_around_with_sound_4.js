@@ -117,7 +117,7 @@ function cymbal_sound_3(duration) {
 
 function synth_strings(note, f, duration) {
     const freq = twopi * f * 2; // times 2 for strings?
-    const nfreq = freq * 1.007;
+    const nfreq = freq * 1.008;
     // adsr(0.1, 0.3, 0.4, 0.2)(simultaneously(list(sine_sound(freq, duration), sine_sound(freq * 2, duration))))
     
     
@@ -127,7 +127,7 @@ function synth_strings(note, f, duration) {
                     0.335 * math_sin(freq * t * 3) + 
                     0.200 * math_sin(freq * t * 4) + 
                     0.168 * math_sin(freq * t * 5)
-                    ) / 6 + (
+                    ) / 10 + (
                     0.891 * math_sin(nfreq * t * 1) + 
                     1.000 * math_sin(nfreq * t * 2)
                     ) / 16
@@ -138,7 +138,7 @@ function synth_strings(note, f, duration) {
 
     // return adsr(0.01, 0.9, 0, 0.1)(violin(note, duration));
     // return base_sound;
-    return adsr(0.1, 0.6, 0, 0.05)(base_sound);
+    return adsr(0.2, 0, 0.8, 0.4)(base_sound);
 }
 
 
@@ -166,7 +166,7 @@ function overlap_consec(list_of_sounds) {
                             ? last_wave(t) + current_wave(t - current_duration)
                             : 0 ;
             
-            return perc_helper(current_duration + current_wave_dur / 1.6, new_wave, tail(remaining_sounds));
+            return perc_helper(current_duration + current_wave_dur / 1.5, new_wave, tail(remaining_sounds));
         }
     }
     
@@ -224,7 +224,7 @@ function generate_sound_t1(encoded_0) {
     
     // can add chords here
     const sound_func = sound_type === 1
-                        ? (note, freq, duration) => synth_strings(note, freq, duration * 1.6)
+                        ? (note, freq, duration) => synth_strings(note, freq, duration * 1.5)
                         : sound_type === 2
                         ? (note, freq, duration) => synth_strings(note, freq, duration)
                         : sound_type === 3
