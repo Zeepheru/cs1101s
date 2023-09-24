@@ -114,7 +114,8 @@ function cymbal_sound_3(duration) {
 
 // TRY OUT SOME NEW WAVES
 
-function clean_tone(freq, duration) {
+function clean_tone(f0, duration) {
+    const freq = 2 * math_PI * f0;
     const wave = t => math_exp(-0.6 * t / duration)
                 * ( math_sin(freq * t) 
                     + 1/2 * math_sin(freq * 2 * t)
@@ -135,7 +136,8 @@ function clean_tone(freq, duration) {
     return adsr(0.02, 0.9, 0, 0.1)(base_sound);
 }
 
-function clean_tone2(freq, duration) {
+function clean_tone2(f0, duration) {
+    const freq = 2 * math_PI * f0;
     const wave = t => math_exp(-1 * t / duration)
                 * ( math_sin(freq * t) 
                     + 1/5 * math_sin(freq * 2 * t)
@@ -152,7 +154,8 @@ function clean_tone2(freq, duration) {
     return adsr(0.05, 0.9, 0, 0.1)(base_sound);
 }
 
-function clean_tone_empirical(freq, duration) {
+function clean_tone_empirical(f0, duration) {
+    const freq = 2 * math_PI * f0;
     // use A3, 220 Hz, 6 secs duration
     const wave = t => math_exp(-1 * t / duration)
                 * ( 
@@ -191,7 +194,9 @@ function clean_tone_empirical(freq, duration) {
     return adsr(0.05, 0.9, 0, 0.1)(base_sound);
 }
 
-function dist_tone(freq, duration) {
+function dist_tone(f0, duration) {
+    const freq = 2 * math_PI * f0;
+    
     const main_freqs = t =>  ( math_sin(freq * t) 
                     + 1/2 * math_sin(freq * 2 * t)
                     + 1/4 * math_sin(freq * 3 * t)
