@@ -217,8 +217,8 @@ function generate_sound_t1(encoded_0) {
     const note_number = math_floor((encoded % 1e7) / 1e5) + 21;
     
     // Override
-    const sound_type = 2;
-    // const sound_type = math_floor(encoded / 1e7);
+    // const sound_type = 2;
+    const sound_type = math_floor(encoded / 1e7);
     
     
     const duration = bar_duration * nn / dd;
@@ -227,7 +227,7 @@ function generate_sound_t1(encoded_0) {
     
     // can add chords here
     const sound_func = sound_type === 1
-                        ? (note, freq, duration) => synth_strings(note, freq, duration)
+                        ? (note, freq, duration) => synth_strings(note, freq, duration * 1.2)
                         : sound_type === 2
                         ? (note, freq, duration) => synth_strings(note, freq, duration)
                         : sound_type === 3
@@ -245,7 +245,7 @@ function generate_sound_t1(encoded_0) {
 
 const rickroll_melody_soundlist = apply_function_to_list(generate_sound_t1, list_encoded_rickroll);
 
-// const test_sound = consecutively(rickroll_melody_soundlist);
-const test_sound = overlap_consec(rickroll_melody_soundlist);
+const test_sound = consecutively(rickroll_melody_soundlist);
+// const test_sound = overlap_consec(rickroll_melody_soundlist);
 play(test_sound);
 
