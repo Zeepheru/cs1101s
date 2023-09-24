@@ -17,7 +17,7 @@ import {
 function show_waveform(sound) {
     // DO NOT USE WITH LONG DURATIONS. IT WILL COMPLETELY HANG.
     const dur = get_duration(sound);
-    const draw_freq = 48000; // standard for most audio formats
+    const draw_freq = 1000; // standard for most audio formats
     
     const wave = t => get_wave(sound)(t);
     
@@ -187,11 +187,48 @@ function clean_tone_empirical(f0, duration) {
                     0.005 * math_sin(freq * 26 * t) + 
                     0.002 * math_sin(freq * 27 * t) + 
                     0.002 * math_sin(freq * 28 * t)
-                    );
+                    ) / 5;
                     
     const base_sound = make_sound(wave, duration);
     
-    return adsr(0.05, 0.9, 0, 0.1)(base_sound);
+    return adsr(0.001, 0.9, 0, 0.1)(base_sound);
+}
+
+function clean_tone_v2(f0, duration) {
+    const freq = 2 * math_PI * f0;
+    // use A3, 220 Hz, 6 secs duration
+    const wave = t => math_exp(-1 * t / duration)
+                * ( 
+                    0.501 * math_sin(freq * 1 * t) + 
+                    0.562 * math_sin(freq * 2 * t) + 
+                    0.631 * math_sin(freq * 3 * t) + 
+                    1.000 * math_sin(freq * 4 * t) + 
+                    0.562 * math_sin(freq * 5 * t) + 
+                    0.376 * math_sin(freq * 6 * t) + 
+                    0.376 * math_sin(freq * 7 * t) + 
+                    0.355 * math_sin(freq * 8 * t) + 
+                    0.266 * math_sin(freq * 9 * t) + 
+                    0.071 * math_sin(freq * 10 * t) + 
+                    0.355 * math_sin(freq * 11 * t) + 
+                    0.398 * math_sin(freq * 12 * t) + 
+                    0.094 * math_sin(freq * 13 * t) + 
+                    0.084 * math_sin(freq * 14 * t) + 
+                    0.045 * math_sin(freq * 15 * t) + 
+                    0.112 * math_sin(freq * 16 * t) + 
+                    0.071 * math_sin(freq * 17 * t) + 
+                    0.032 * math_sin(freq * 18 * t) + 
+                    0.071 * math_sin(freq * 19 * t) + 
+                    0.067 * math_sin(freq * 20 * t) + 
+                    0.126 * math_sin(freq * 21 * t) + 
+                    0.071 * math_sin(freq * 22 * t) + 
+                    0.032 * math_sin(freq * 23 * t) + 
+                    0.032 * math_sin(freq * 24 * t) + 
+                    0.021 * math_sin(freq * 25 * t)
+                    ) / 5;
+                    
+    const base_sound = make_sound(wave, duration);
+    
+    return adsr(0.001, 0.9, 0, 0.1)(base_sound);
 }
 
 function dist_tone(f0, duration) {
@@ -214,9 +251,9 @@ function dist_tone(f0, duration) {
     // return adsr(0.1, 0.3, 0.4, 0.2)(base_sound);
 }
 
-const test_note = clean_tone_empirical(220, 6);
+const test_note = clean_tone_v2(220, 6);
 
-show_waveform(test_note);
+// show_waveform(test_note);
 play(test_note);
 
 ///
