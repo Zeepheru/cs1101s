@@ -138,7 +138,7 @@ function synth_strings(note, f, duration) {
 
     // return adsr(0.01, 0.9, 0, 0.1)(violin(note, duration));
     // return base_sound;
-    return adsr(0.1, 0., 0, 0.05)(base_sound);
+    return adsr(0.1, 0.6, 0, 0.05)(base_sound);
 }
 
 
@@ -245,4 +245,5 @@ const rickroll_melody_soundlist = apply_function_to_list(generate_sound_t1, list
 // const test_sound = consecutively(rickroll_melody_soundlist);
 const test_sound = overlap_consec(rickroll_melody_soundlist);
 play(test_sound);
+show_waveform(test_sound);
 
