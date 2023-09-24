@@ -325,10 +325,10 @@ function generate_sound_t1(encoded_0) {
 
 // SOUND TESTS //
 
-// const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_megalovania_riff));
+// const test_sound = consecutively(map(generate_sound_t1, list_encoded_megalovania_riff));
 // play(simultaneously(list(drum_test, consecutively(list(test_sound, test_sound)))));
 
 
-// const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_rickroll));
+// const test_sound = consecutively(map(generate_sound_t1, list_encoded_rickroll));
 // play(simultaneously(list(drum_test, test_sound)));
 
