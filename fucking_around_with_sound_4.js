@@ -135,10 +135,10 @@ function clean_tone(freq, duration) {
 }
 
 
-const test_note = clean_tone_empirical(220, 6);
+// const test_note = clean_tone_empirical(220, 6);
 
 // show_waveform(test_note);
-play(test_note);
+// play(test_note);
 
 ///
  
@@ -212,6 +212,6 @@ function generate_sound_t1(encoded_0) {
 // play(simultaneously(list(drum_test, consecutively(list(test_sound, test_sound)))));
 
 
-// const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_rickroll));
-// play(simultaneously(list(drum_test, test_sound)));
+const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_rickroll));
+play(test_sound);
 
