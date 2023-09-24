@@ -191,7 +191,6 @@ const snare = snare_perhaps(note_8th);
 // show_waveform(drum1);
 // play(drum1);
 
-// const d1 = consecutively(list(double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal, double_kick_metal));
 const d1 = consecutively(list(kick_1, kick_1, snare, rest_8th));
 const d2 = consecutively(list(cym, cym2, cym, cym));
 
