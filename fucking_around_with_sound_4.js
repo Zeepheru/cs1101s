@@ -112,8 +112,6 @@ function cymbal_sound_3(duration) {
 function synth_strings(note, f, duration) {
     const freq = twopi * f * 2; // times 2 for strings?
     const nfreq = freq * 1.008;
-    // adsr(0.1, 0.3, 0.4, 0.2)(simultaneously(list(sine_sound(freq, duration), sine_sound(freq * 2, duration))))
-    
     
     const wave = t => (
                     0.891 * math_sin(freq * t * 1) + 
