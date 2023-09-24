@@ -143,7 +143,6 @@ play(test_note);
 ///
  
 const kick_1 = kick_sound_1(note_8th);
-const double_kick_metal = kick_sound_1(note_32nd);
 
 const cym = cymbal_sound_3(note_8th);
 const cym2 = cymbal_sound_2(note_8th);
