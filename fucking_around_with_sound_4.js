@@ -113,23 +113,15 @@ function cymbal_sound_3(duration) {
 
 // TRY OUT SOME NEW WAVES
 
-function clean_tone(freq, duration) {
-    const wave = t => math_exp(-0.6 * t / duration)
-                * ( math_sin(freq * t) 
-                    + 1/2 * math_sin(freq * 2 * t)
-                    + 1/2.2 * math_sin(freq * 3 * t)
-                    + 1/3 * math_sin(freq * 4 * t)
-                    + 1/4 * math_sin(freq * 5 * t)
-                    + 1/4.4 * math_sin(freq * 6 * t)
-                    + 1/4.7 * math_sin(freq * 7 * t)
-                    + 1/5 * math_sin(freq * 8 * t)
-                    + 1/5 * math_sin(freq * 9 * t)
-                    + 1/5 * math_sin(freq * 10 * t)
-                    + 1/5 * math_sin(freq * 11 * t)
-                    + 1/7 * math_sin(freq * 12 * t)
-                    );
+function synth_strings(freq, duration) {
+    // adsr(0.1, 0.3, 0.4, 0.2)(simultaneously(list(sine_sound(freq, duration), sine_sound(freq * 2, duration))))
+    // const wave = t => math_exp(-0.6 * t / duration)
+    //             * ( math_sin(freq * t) );
                     
-    const base_sound = make_sound(wave, duration);
+    // const base_sound = make_sound(wave, duration);
+    
+    
+    
     
     return adsr(0.02, 0.9, 0, 0.1)(base_sound);
 }
@@ -192,7 +184,7 @@ function generate_sound_t1(encoded_0) {
     
     // can add chords here
     const sound_func = sound_type === 1
-                        ? (freq, duration) => adsr(0.1, 0.3, 0.4, 0.2)(simultaneously(list(square_sound(freq, duration), square_sound(freq / 2, duration))))
+                        ? synth_strings
                         : sound_type === 2
                         ? triangle_sound
                         : sound_type === 3
