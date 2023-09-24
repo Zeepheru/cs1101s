@@ -34,12 +34,6 @@ function test_show_function() {
     draw_connected_full_view_proportional(1000)(test_func);
 }
 
-function apply_function_to_list(f, lst) {
-    return is_null(lst)
-            ? null
-            : pair(f(head(lst)), apply_function_to_list(f, tail(lst)));
-}
-
 const list_encoded_rickroll = list(915203008, 915403008, 914701004, 915403008, 915603008, 915901016, 915701016, 915601016, 915201016, 915203008, 915403008, 914701004, 900005008, 914715256, 900001256, 914701016, 914901016, 915201016, 914901016, 915201016, 915203008, 915403008, 914701004, 915403008, 915603008, 915901016, 915701016, 915601016, 915201016, 915203008, 915403008, 914701004);
 
 const bpm = 120;
