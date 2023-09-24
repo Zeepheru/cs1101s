@@ -117,7 +117,7 @@ function cymbal_sound_3(duration) {
 
 function synth_strings(note, f, duration) {
     const freq = twopi * f * 2; // times 2 for strings?
-    const nfreq = freq * 1.005;
+    const nfreq = freq * 1.007;
     // adsr(0.1, 0.3, 0.4, 0.2)(simultaneously(list(sine_sound(freq, duration), sine_sound(freq * 2, duration))))
     
     
@@ -161,7 +161,7 @@ function overlap_consec(list_of_sounds) {
             return make_sound(last_wave, current_duration);
         } else {
             const current_wave = get_wave(head(remaining_sounds));
-            const current_wave_dur = get_duration(head(remaining_sounds));
+            const current_wave_dur = get_duration(head(remaining_sounds)) / 1.2;
         
             const new_wave = t => t < current_duration
                             ? last_wave(t)
@@ -245,7 +245,7 @@ function generate_sound_t1(encoded_0) {
 
 const rickroll_melody_soundlist = apply_function_to_list(generate_sound_t1, list_encoded_rickroll);
 
-const test_sound = consecutively(rickroll_melody_soundlist);
-// const test_sound = overlap_consec(rickroll_melody_soundlist);
+// const test_sound = consecutively(rickroll_melody_soundlist);
+const test_sound = overlap_consec(rickroll_melody_soundlist);
 play(test_sound);
 
