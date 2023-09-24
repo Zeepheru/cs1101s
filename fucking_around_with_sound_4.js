@@ -153,11 +153,11 @@ function synth_strings(note, f, duration) {
 
 
 // test overlapping
-function percussions(distance, list_of_sounds) {
-    const rhythm_length = length(list_of_sounds);
+function percussions(list_of_sounds) {
+    // const rhythm_length = length(list_of_sounds);
     
     function perc_helper(current_n, last_wave, remaining_sounds) {
-        const current_duration = current_n * distance;
+        const current_duration = get_duration(last_wave);
         
         if (current_n === rhythm_length) {
             return make_sound(last_wave, current_duration);
@@ -247,9 +247,9 @@ function generate_sound_t1(encoded_0) {
 
 // SOUND TESTS //
 
-const rickroll_melody_soundlist = 
+const rickroll_melody_soundlist = apply_function_to_list(generate_sound_t1, list_encoded_rickroll);
 
-const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_rickroll));
-const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_rickroll));
+const test_sound = consecutively(rickroll_melody_soundlist);
+const test_sound = overlap_consec(rickroll_melody_soundlist);
 play(test_sound);
 
