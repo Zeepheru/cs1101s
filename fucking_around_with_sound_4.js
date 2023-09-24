@@ -150,6 +150,33 @@ function synth_strings(note, f, duration) {
 // show_waveform(test_note);
 // play(test_note);
 
+
+
+// test overlapping
+function percussions(distance, list_of_sounds, rhythm) {
+    const rhythm_length = length(rhythm);
+    const sounds_in_rhythm = map(n => list_ref(list_of_sounds, n), rhythm);
+    
+    function perc_helper(current_n, last_wave, remaining_sounds) {
+        const current_duration = current_n * distance;
+        
+        if (current_n === rhythm_length) {
+            return make_sound(last_wave, current_duration);
+        } else {
+            const current_wave = get_wave(head(remaining_sounds));
+        
+            const new_wave = t => t < current_duration
+                            ? last_wave(t)
+                            : last_wave(t) + current_wave(t - current_duration);
+            
+            return perc_helper(current_n + 1, new_wave, tail(remaining_sounds));
+        }
+    }
+    
+    return perc_helper(0, t => 0, sounds_in_rhythm);
+}
+
+
 ///
  
 const kick_1 = kick_sound_1(note_8th);
