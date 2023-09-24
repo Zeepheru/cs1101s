@@ -157,7 +157,9 @@ function introdrum1(duration) {
 
 const id1 = introdrum1(beat);
 
-play(id1)
+
+show_waveform(id1);
+play(id1);
 
 
 
@@ -243,8 +245,8 @@ const tester = tom_perhaps(beat);
 
 
 // DRUM TESTS
-show_waveform(full_drums_bar);
-play(full_drums_bar);
+// show_waveform(full_drums_bar);
+// play(full_drums_bar);
 
 
 
