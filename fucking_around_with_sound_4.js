@@ -127,13 +127,10 @@ function synth_strings(note, f, duration) {
                     0.335 * math_sin(freq * t * 3) + 
                     0.200 * math_sin(freq * t * 4) + 
                     0.168 * math_sin(freq * t * 5)
-                    ) / 5 + (
+                    ) / 6 + (
                     0.891 * math_sin(nfreq * t * 1) + 
-                    1.000 * math_sin(nfreq * t * 2) + 
-                    0.335 * math_sin(nfreq * t * 3) + 
-                    0.200 * math_sin(nfreq * t * 4) + 
-                    0.168 * math_sin(nfreq * t * 5)
-                    ) / 15
+                    1.000 * math_sin(nfreq * t * 2)
+                    ) / 16
                     ;
                     
     const base_sound = make_sound(wave, duration);
@@ -141,7 +138,7 @@ function synth_strings(note, f, duration) {
 
     // return adsr(0.01, 0.9, 0, 0.1)(violin(note, duration));
     // return base_sound;
-    return adsr(0.2, 0.7, 0, 0.1)(base_sound);
+    return adsr(0.1, 0., 0, 0.05)(base_sound);
 }
 
 
@@ -161,7 +158,7 @@ function overlap_consec(list_of_sounds) {
             return make_sound(last_wave, current_duration);
         } else {
             const current_wave = get_wave(head(remaining_sounds));
-            const current_wave_dur = get_duration(head(remaining_sounds)) / 1.2;
+            const current_wave_dur = get_duration(head(remaining_sounds));
         
             const new_wave = t => t < current_duration
                             ? last_wave(t)
@@ -169,7 +166,7 @@ function overlap_consec(list_of_sounds) {
                             ? last_wave(t) + current_wave(t - current_duration)
                             : 0 ;
             
-            return perc_helper(current_duration + current_wave_dur, new_wave, tail(remaining_sounds));
+            return perc_helper(current_duration + current_wave_dur / 1.6, new_wave, tail(remaining_sounds));
         }
     }
     
@@ -227,7 +224,7 @@ function generate_sound_t1(encoded_0) {
     
     // can add chords here
     const sound_func = sound_type === 1
-                        ? (note, freq, duration) => synth_strings(note, freq, duration * 1.2)
+                        ? (note, freq, duration) => synth_strings(note, freq, duration * 1.6)
                         : sound_type === 2
                         ? (note, freq, duration) => synth_strings(note, freq, duration)
                         : sound_type === 3
