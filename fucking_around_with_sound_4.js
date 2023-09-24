@@ -153,9 +153,8 @@ function synth_strings(note, f, duration) {
 
 
 // test overlapping
-function percussions(distance, list_of_sounds, rhythm) {
-    const rhythm_length = length(rhythm);
-    const sounds_in_rhythm = map(n => list_ref(list_of_sounds, n), rhythm);
+function percussions(distance, list_of_sounds) {
+    const rhythm_length = length(list_of_sounds);
     
     function perc_helper(current_n, last_wave, remaining_sounds) {
         const current_duration = current_n * distance;
@@ -173,7 +172,7 @@ function percussions(distance, list_of_sounds, rhythm) {
         }
     }
     
-    return perc_helper(0, t => 0, sounds_in_rhythm);
+    return perc_helper(0, t => 0, list_of_sounds);
 }
 
 
