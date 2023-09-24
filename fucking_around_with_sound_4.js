@@ -116,9 +116,8 @@ function cymbal_sound_3(duration) {
 // TRY OUT SOME NEW WAVES
 
 function synth_strings(note, f, duration) {
-    display(note);
-    display(freq);
     const freq = twopi * f * 2; // times 2 for strings?
+    const nfreq = freq * 1.005;
     // adsr(0.1, 0.3, 0.4, 0.2)(simultaneously(list(sine_sound(freq, duration), sine_sound(freq * 2, duration))))
     
     
@@ -128,13 +127,21 @@ function synth_strings(note, f, duration) {
                     0.335 * math_sin(freq * t * 3) + 
                     0.200 * math_sin(freq * t * 4) + 
                     0.168 * math_sin(freq * t * 5)
-                    );
+                    ) / 5 + (
+                    0.891 * math_sin(nfreq * t * 1) + 
+                    1.000 * math_sin(nfreq * t * 2) + 
+                    0.335 * math_sin(nfreq * t * 3) + 
+                    0.200 * math_sin(nfreq * t * 4) + 
+                    0.168 * math_sin(nfreq * t * 5)
+                    ) / 15
+                    ;
                     
     const base_sound = make_sound(wave, duration);
     
 
     // return adsr(0.01, 0.9, 0, 0.1)(violin(note, duration));
-    return adsr(0.01, 0.9, 0, 0.1)(base_sound);
+    // return base_sound;
+    return adsr(0.2, 0.7, 0, 0.1)(base_sound);
 }
 
 
@@ -210,9 +217,6 @@ function generate_sound_t1(encoded_0) {
 }
 
 // SOUND TESTS //
-
-// const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_megalovania_riff));
-// play(simultaneously(list(drum_test, consecutively(list(test_sound, test_sound)))));
 
 
 const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_rickroll));
