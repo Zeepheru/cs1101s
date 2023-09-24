@@ -104,7 +104,7 @@ function cymbal_sound_1(duration) {
     const wave = t => math_exp(-7 * t / duration) * (noise(t) * noise(t) - 1 * 
                         math_sin(10 * math_sqrt(t)));
     
-    return adsr(0.05, 0, 0.8, 0.1)(make_sound(wave, duration));
+    return adsr(0.01, 0, 0.8, 0.1)(make_sound(wave, duration));
 }
 
 function cymbal_sound_2(duration) {
@@ -123,12 +123,23 @@ function cymbal_sound_3(duration) {
     return adsr(0.02, 0, 0.8, 0.1)(make_sound(wave, duration));
 }
 
-function cymbal_sound_4(duration) {
+function cymbal_sound_4(duration) { 
     const noise = t => get_wave(noise_sound(duration))(t);
-    
-    const wave = t => math_exp(-15 * t / duration) * (noise(t));
+    const wave = t => 0.5 * math_exp(-8 * t / duration) * (noise(t) - 0.5 * math_sin(240 * twopi * t)) ;
     
     return (make_sound(wave, duration));
+}
+
+function cymbal_sound_rings(dur) { 
+    const duration = dur * 2;
+    const noise = t => get_wave(noise_sound(duration))(t);
+    
+    const ahfunc = t => 1 / (2 + 4 * (t - dur) * (t - dur));
+    
+    const wave = t => 0.5 * math_exp(-5 * t / duration) * (noise(t)) + 
+                      0.4 * math_exp(-4 * t / duration) * ahfunc(t) * (math_sin(3000 * t) + 0.4 * math_sin(1500 * t)) ;
+    
+    return adsr(0.01, 0.3, 0.8, 0.2)(make_sound(wave, duration));
 }
 
 // TRY OUT SOME NEW WAVES
@@ -218,9 +229,10 @@ function overlap_consec_times(list_of_sounds, times) {
  
 const kick_1 = kick_sound_1(beat);
 
-const cym = cymbal_sound_3(beat);
+const cym = cymbal_sound_1(beat);
 const cym2 = cymbal_sound_2(beat);
-const cym4 = cymbal_sound_2(note_8th);
+const hh_closed = cymbal_sound_4(note_8th);
+const hh_open = cymbal_sound_rings(note_8th);
 const snare = snare_v2(note_8th);
 
 const tester = tom_perhaps(beat);
@@ -242,8 +254,8 @@ const drum_test = consecutively(list(drums_x4, drums_x4, drums_x4, drums_x4));
 // show_waveform(drums_x4);
 
 // DRUM TESTS
-show_waveform(cym4);
-play(cym4);
+show_waveform(hh_open);
+play(hh_open);
 
 
 
