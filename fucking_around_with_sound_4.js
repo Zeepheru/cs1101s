@@ -240,7 +240,7 @@ function generate_sound_t1(encoded_0) {
 
 // SOUND TESTS //
 
-const rickroll_melody_soundlist = apply_function_to_list(generate_sound_t1, list_encoded_rickroll);
+const rickroll_melody_soundlist = map(generate_sound_t1, list_encoded_rickroll);
 
 // const test_sound = consecutively(rickroll_melody_soundlist);
 const test_sound = overlap_consec(rickroll_melody_soundlist);
