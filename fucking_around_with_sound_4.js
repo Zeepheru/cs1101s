@@ -205,6 +205,9 @@ const drum_test = consecutively(list(drums_x4, drums_x4, drums_x4, drums_x4));
 
 // try and generate sounds from t1 encoded numbers
 function generate_sound_t1(encoded_0) {
+    // Override
+    const sound_type = 2;
+    
     function get_freq(note_number) {
         return note_number === 0
                 ? 0
@@ -230,7 +233,7 @@ function generate_sound_t1(encoded_0) {
     const sound_func = sound_type === 1
                         ? (note, freq, duration) => synth_strings(note, freq, duration)
                         : sound_type === 2
-                        ? (note, freq, duration) => triangle_sound(freq, duration)
+                        ? (note, freq, duration) => synth_strings(note, freq, duration)
                         : sound_type === 3
                         ? (note, freq, duration) => sawtooth_sound(freq, duration)
                         : sound_type === 4
@@ -244,7 +247,9 @@ function generate_sound_t1(encoded_0) {
 
 // SOUND TESTS //
 
+const rickroll_melody_soundlist = 
 
+const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_rickroll));
 const test_sound = consecutively(apply_function_to_list(generate_sound_t1, list_encoded_rickroll));
 play(test_sound);
 
