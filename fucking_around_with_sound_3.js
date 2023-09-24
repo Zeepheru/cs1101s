@@ -197,7 +197,7 @@ function clean_tone_empirical(f0, duration) {
 function clean_tone_v2(f0, duration) {
     const freq = 2 * math_PI * f0;
     // use A3, 220 Hz, 6 secs duration
-    const wave = t => math_exp(-1 * t / duration)
+    const wave = t => math_exp(-4 * t / duration)
                 * ( 
                     0.501 * math_sin(freq * 1 * t) + 
                     0.562 * math_sin(freq * 2 * t) + 
@@ -253,7 +253,7 @@ function dist_tone(f0, duration) {
 
 const test_note = clean_tone_v2(220, 6);
 
-// show_waveform(test_note);
+show_waveform(test_note);
 play(test_note);
 
 ///
