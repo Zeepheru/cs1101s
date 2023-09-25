@@ -194,11 +194,6 @@ function overlap_consec_times(list_of_sounds, times) {
 ///
 
 // FOR THY INTRO
-/*
-160 Hz to 90 Hz or so drop (1000 -> 550)
-
-*/
-
 function introdrum1(duration) {
     const noise = t => get_wave(noise_sound(duration))(t);
      
