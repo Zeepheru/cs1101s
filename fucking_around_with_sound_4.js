@@ -173,35 +173,30 @@ function synth_strings(note, f, duration) {
     const base_sound = make_sound(wave, duration);
     
 
-    // return adsr(0.01, 0.9, 0, 0.1)(violin(note, duration));
+    return adsr(0.01, 0.9, 0, 0.1)(violin(note, duration));
     // return base_sound;
-    return adsr(0.3, 0, 0.8, 0.4)(base_sound); 
+    // return adsr(0.3, 0, 0.8, 0.4)(base_sound); 
 }
 
 // NEW EFFECTS
 function chorus(sound) {
     // params set inside
     // delay LFO freq, in Hz
-    const lfo_freq = 7;
+    const lfo_freq = 3;
     
     function lfo_creator(delay_min, delay_max) {
         const delay_range = (delay_max - delay_min) / 2000;
         const delay_avr = (delay_max + delay_min) / 2000;
         const ang_freq = twopi * lfo_freq;
         
-        display(delay_range);
-        display(delay_avr);
-        display(ang_freq);
-        
         return t => delay_range * math_sin(ang_freq * t) + delay_avr;
     }
     
-    const lfo = lfo_creator(0, 1);
-    display(lfo);
+    const lfo = lfo_creator(5, 6);
     const sound_dur = get_duration(sound);
     const sound_wave = get_wave(sound);
     
-    return make_sound(t => sound_wave(t) + sound_wave(t + lfo(t)), sound_dur);
+    return make_sound(t => 0.5 * (sound_wave(t) + sound_wave(t + lfo(t))), sound_dur);
 }
 
 // NOTE TESTING
@@ -304,5 +299,5 @@ const rickroll_melody_soundlist = map(generate_sound_t1, list_encoded_rickroll);
 // const test_sound = consecutively(rickroll_melody_soundlist);
 const test_sound = chorus(overlap_consec(rickroll_melody_soundlist));
 play(test_sound);
-show_waveform(test_sound);
+// show_waveform(test_sound);
 
