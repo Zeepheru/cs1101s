@@ -193,7 +193,7 @@ function chorus(sound) {
     const sound_dur = get_duration(sound);
     const sound_wave = get_wave(sound);
     
-    return make_sound(t => sound_wave(t) + sound_wave(lfo(t)));
+    return make_sound(t => sound_wave(t) + sound_wave(lfo(t)), sound_dur);
 }
 
 
