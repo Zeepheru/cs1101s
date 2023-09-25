@@ -228,29 +228,8 @@ function overlap_consec(list_of_sounds) {
 }
 
 
-///
- 
-const kick_1 = kick_sound_1(note_8th);
+/// Drums
 
-const cym = cymbal_sound_3(note_8th);
-const cym2 = cymbal_sound_2(note_8th);
-const snare = snare_perhaps(note_8th);
-
-// const kick_test = consecutively(list(kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1, kick_1));
-
-// test_show_function();
-
-// show_waveform(drum1);
-// play(drum1);
-
-const d1 = consecutively(list(kick_1, kick_1, snare, rest_8th));
-const d2 = consecutively(list(cym, cym2, cym, cym));
-
-const drums = simultaneously(list(d1, d2));
-
-const drums_x4 = consecutively(list(drums, drums, drums, drums));
-const drum_test = consecutively(list(drums_x4, drums_x4, drums_x4, drums_x4));
-// show_waveform(drums_x4);
 
 
 
