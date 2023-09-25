@@ -178,6 +178,27 @@ function synth_strings(note, f, duration) {
     return adsr(0.3, 0, 0.8, 0.4)(base_sound); 
 }
 
+// NEW EFFECTS
+function chorus(sound) {
+    // params set inside
+    // delay LFO freq, in Hz
+    const lfo_freq = 17;
+    
+    function lfo(delay_min, delay_max) {
+        return t => (delay_max - delay_min) / 2000 * math_sin(twopi * lfo_freq * t);
+    }
+    
+    const lfo_func = lfo(15, 35);
+    const sound_dur = get_duration(sound);
+    const sound_wave = get_wave(sound);
+    
+    
+}
+
+
+
+
+
 // const test_note = clean_tone_empirical(220, 6);
 
 // show_waveform(test_note);
