@@ -17,7 +17,7 @@ import {
 function show_waveform(sound) {
     // DO NOT USE WITH LONG DURATIONS. IT WILL COMPLETELY HANG.
     const dur = get_duration(sound);
-    const draw_freq = 6000; // standard for most audio formats
+    const draw_freq = 6000; 
     
     const wave = t => get_wave(sound)(t);
     
@@ -210,19 +210,19 @@ function introdrum1(duration) {
     return adsr(0.01, 0.3, 0.8, 0.2)(make_sound(wave, duration));
 }
 
-function introdrum1(duration) {
+function introdrum2(duration) {
     const noise = t => get_wave(noise_sound(duration))(t);
-    const frequency = t => 1100 - t * (2 * );
+    const frequency = x => 1100 - x * (2 / duration);
      
     const wave = t => math_exp(-2 * t / duration) * (
-                            (math_sin(frequency * t) 
-                            - 0.073 * math_cos(2 * frequency * t)
+                            (math_sin(frequency(t) * t) 
+                            - 0.073 * math_cos(2 * frequency(t) * t)
                             - 0.2 * noise(t)
                             ));
     return adsr(0.01, 0.3, 0.8, 0.2)(make_sound(wave, duration));
 }
 
-const id1 = introdrum1(note_8th);
+const id1 = introdrum2(note_8th);
 
 const test_intro = overlap_consec_times(
                             list(id1, id1, id1, id1, id1, id1, id1, id1, id1), 
