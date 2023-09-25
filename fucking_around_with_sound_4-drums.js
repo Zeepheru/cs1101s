@@ -251,8 +251,6 @@ function drum_exp_drop_partial(amplitude, duration) {
 const intro_length = note_16th * 10;
 const intro_noise = t => get_wave(noise_sound(intro_length))(t);
 
-const id1 = introdrum2(note_8th);
-
 function sine_decrease_sound(start, stop, duration) {
     const start_f = start * twopi;
     const end_f = stop * twopi;
@@ -290,7 +288,7 @@ function gimme_intro(sines, drums) {
     const sine_waves = get_wave(sines);
     const drum_waves = get_wave(drums);
     
-    const new_wave = t => sine_waves(t) * drum_waves(t);
+    const new_wave = t => drum_waves(t);
     
     return make_sound(new_wave, duration);
 }
