@@ -275,7 +275,7 @@ function generate_sound_t1(encoded_0) {
     
     // can add chords here
     const sound_func = sound_type === 1
-                        ? (note, freq, duration) => synth_strings(note, freq, duration * 1.5)
+                        ? (note, freq, duration) => chorus(synth_strings(note, freq, duration * 1.5))
                         : sound_type === 2
                         ? (note, freq, duration) => synth_strings(note, freq, duration)
                         : sound_type === 3
