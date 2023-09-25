@@ -222,18 +222,39 @@ function introdrum2(duration) {
     return adsr(0.01, 0.3, 0.8, 0.2)(make_sound(wave, duration));
 }
 
+// NEW EFFECTS
+function chorus(sound) {
+    // params set inside
+    // delay LFO freq, in Hz
+    const lfo_freq = 3;
+    
+    function lfo_creator(delay_min, delay_max) {
+        const delay_range = (delay_max - delay_min) / 2000;
+        const delay_avr = (delay_max + delay_min) / 2000;
+        const ang_freq = twopi * lfo_freq;
+        
+        return t => delay_range * math_sin(ang_freq * t) + delay_avr;
+    }
+    
+    const lfo = lfo_creator(5, 6);
+    const sound_dur = get_duration(sound);
+    const sound_wave = get_wave(sound);
+    
+    return make_sound(t => 0.5 * (sound_wave(t) + sound_wave(t + lfo(t))), sound_dur);
+}
+
 // make all into pairs
 
 function drum_exp_drop(duration) {
-    return make_sound(t => math_exp(-2 * t / note_16th) * noise(t), duration);
+    return make_sound(t => math_exp(-1 * t / note_16th), duration);
 }
 
 function drum_exp_drop_partial(amplitude, duration) {
-    return make_sound(t => amplitude * math_exp(-2 * t / note_16th) * noise(t), duration);
+    return make_sound(t => amplitude * math_exp(-1 * t / note_16th), duration);
 }
 
 const intro_length = note_16th * 10;
-const noise = t => get_wave(noise_sound(intro_length))(t);
+const intro_noise = t => get_wave(noise_sound(intro_length))(t);
 
 const id1 = introdrum2(note_8th);
 
@@ -245,8 +266,8 @@ function sine_decrease_sound(start, stop, duration) {
     const freq = t => m * t + start_f;
     
     const sound_wave = t => 
-                        math_sin(freq(t) * t) + 
-                        0.25 * math_sin(2 * freq(t) * t);
+                        math_sin(freq(t) * t)
+                        + 0.25 * math_sin(2 * freq(t) * t);
                         
     return make_sound(sound_wave, duration);
 }
