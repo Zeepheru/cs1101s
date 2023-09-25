@@ -300,7 +300,7 @@ function generate_sound_t1(encoded_0) {
 const rickroll_melody_soundlist = map(generate_sound_t1, list_encoded_rickroll);
 
 // const test_sound = consecutively(rickroll_melody_soundlist);
-const test_sound = overlap_consec(rickroll_melody_soundlist);
+const test_sound = chorus(overlap_consec(rickroll_melody_soundlist));
 play(test_sound);
 // show_waveform(test_sound);
 
