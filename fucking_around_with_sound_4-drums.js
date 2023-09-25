@@ -194,7 +194,7 @@ function overlap_consec_times(list_of_sounds, times) {
 ///
 
 // FOR THY INTRO
-function introdrum1(duration) {
+/*function introdrum1(duration) {
     const noise = t => get_wave(noise_sound(duration))(t);
      
     const wave = t => math_exp(-2 * t / duration) * (
@@ -215,7 +215,7 @@ function introdrum2(duration) {
                             - 0.2 * noise(t)
                             ));
     return adsr(0.01, 0.3, 0.8, 0.2)(make_sound(wave, duration));
-}
+}*/
 
 // NEW EFFECTS
 function chorus(sound) {
