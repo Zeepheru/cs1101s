@@ -182,17 +182,21 @@ function synth_strings(note, f, duration) {
 function chorus(sound) {
     // params set inside
     // delay LFO freq, in Hz
-    const lfo_freq = 17;
+    const lfo_freq = 7;
     
     function lfo_creator(delay_min, delay_max) {
         const delay_range = (delay_max - delay_min) / 2000;
         const delay_avr = (delay_max + delay_min) / 2000;
         const ang_freq = twopi * lfo_freq;
         
+        display(delay_range);
+        display(delay_avr);
+        display(ang_freq);
+        
         return t => delay_range * math_sin(ang_freq * t) + delay_avr;
     }
     
-    const lfo = lfo_creator(380, 420);
+    const lfo = lfo_creator(0, 1);
     display(lfo);
     const sound_dur = get_duration(sound);
     const sound_wave = get_wave(sound);
