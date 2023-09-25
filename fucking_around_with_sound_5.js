@@ -293,13 +293,13 @@ function drum_intro() {
     // make all into pairs
     function drum_exp_drop(duration) {
         return adsr(0.12, 0, 0.9, 0)(make_sound(t => 
-                                            math_exp(-1.8 * t / duration) * (1 + 0.3 * intro_noise(t)), duration));
+                                            math_exp(-2.2 * t / duration) * (1 + 0.3 * intro_noise(t)), duration));
     }
     
     function drum_exp_drop_partial(amplitude, duration) {
         // * math_sin(100 * math_sqrt(t * 2))
         return adsr(0.12, 0, 0.9, 0)(make_sound(t => 
-                                            amplitude * math_exp(-1.8 * t / duration) * (1 + 0.3 * intro_noise(t)), duration));
+                                            amplitude * math_exp(-2.2 * t / duration) * (1 + 0.3 * intro_noise(t)), duration));
     }
     
     const intro_length = note_16th * 10;
@@ -347,7 +347,7 @@ function drum_intro() {
         
         const new_wave = t => drum_waves(t) * sine_waves(t);
         
-        const new_new_wave = t => new_wave(t) + new_wave(t + 0.0013) + 0.04 * intro_noise(t);
+        const new_new_wave = t => new_wave(t) + new_wave(t + 0.0013);
         
         return make_sound(new_new_wave, duration);
     }
