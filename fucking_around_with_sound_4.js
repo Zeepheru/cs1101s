@@ -185,10 +185,10 @@ function chorus(sound) {
     const lfo_freq = 17;
     
     function lfo_creator(delay_min, delay_max) {
-        return t => (delay_max - delay_min) / 2000 * math_sin(twopi * lfo_freq * t);
+        return t => (delay_max - delay_min) / 2000 * math_sin(twopi * lfo_freq * t) + delay_min * 1000;
     }
     
-    const lfo = lfo_creator(15, 35);
+    const lfo = lfo_creator(32, 64);
     const sound_dur = get_duration(sound);
     const sound_wave = get_wave(sound);
     
