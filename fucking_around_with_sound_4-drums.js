@@ -224,10 +224,14 @@ function introdrum2(duration) {
 
 const id1 = introdrum2(note_8th);
 
+
+
+const intro_times = list(note_16th, note_8th, note_16th, note_16th,
+                                note_16th, note_16th, note_16th, note_16th, note_16th, note_16th);
+
 const test_intro = overlap_consec_times(
                             list(id1, id1, id1, id1, id1, id1, id1, id1, id1), 
-                            list(note_16th, note_8th, note_16th, note_16th,
-                                note_16th, note_16th, note_16th, note_16th, note_16th, note_16th));
+                            intro_times);
 
 show_waveform(test_intro);
 play(test_intro);
