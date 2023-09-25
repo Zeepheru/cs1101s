@@ -188,11 +188,11 @@ function chorus(sound) {
         return t => (delay_max - delay_min) / 2000 * math_sin(twopi * lfo_freq * t) + delay_min * 1000;
     }
     
-    const lfo = lfo_creator(32, 64);
+    const lfo = lfo_creator(255, 700);
     const sound_dur = get_duration(sound);
     const sound_wave = get_wave(sound);
     
-    return make_sound(t => sound_wave(t) + sound_wave(t + lfo(t)), sound_dur);
+    return make_sound(t => sound_wave(t) + sound_wave(t + 0.4), sound_dur);
 }
 
 // NOTE TESTING
@@ -274,7 +274,7 @@ function generate_sound_t1(encoded_0) {
     
     // can add chords here
     const sound_func = sound_type === 1
-                        ? (note, freq, duration) => chorus(synth_strings(note, freq, duration * 1.5))
+                        ? (note, freq, duration) => synth_strings(note, freq, duration * 1.5)
                         : sound_type === 2
                         ? (note, freq, duration) => synth_strings(note, freq, duration)
                         : sound_type === 3
@@ -293,7 +293,7 @@ function generate_sound_t1(encoded_0) {
 const rickroll_melody_soundlist = map(generate_sound_t1, list_encoded_rickroll);
 
 // const test_sound = consecutively(rickroll_melody_soundlist);
-const test_sound = overlap_consec(rickroll_melody_soundlist);
+const test_sound = chorus(overlap_consec(rickroll_melody_soundlist));
 play(test_sound);
-// show_waveform(test_sound);
+show_waveform(test_sound);
 
