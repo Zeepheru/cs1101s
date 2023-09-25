@@ -196,14 +196,7 @@ function chorus(sound) {
     return make_sound(t => sound_wave(t) + sound_wave(lfo(t)), sound_dur);
 }
 
-
-
-
-
-// const test_note = clean_tone_empirical(220, 6);
-
-// show_waveform(test_note);
-// play(test_note);
+// NOTE TESTING
 
 
 
