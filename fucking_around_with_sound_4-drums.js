@@ -288,7 +288,9 @@ function gimme_intro(sines, drums) {
     const sine_waves = get_wave(sines);
     const drum_waves = get_wave(drums);
     
-    const new_wave = t => drum_waves(t) * sine_waves(t) + 0.05 * intro_noise(t);
+    const noise_wave = t => noise_wave(t) * drum_waves(t);
+    
+    const new_wave = t => drum_waves(t) * sine_waves(t) - noise_wave(t);
     
     return make_sound(new_wave, duration);
 }
