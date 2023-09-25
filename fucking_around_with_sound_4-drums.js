@@ -241,11 +241,14 @@ function chorus(sound) {
 // make all into pairs
 
 function drum_exp_drop(duration) {
-    return adsr(0.02, 0, 0.99, 0)(make_sound(t => math_exp(-1.3 * t / duration), duration));
+    return adsr(0.05, 0, 0.9, 0)(make_sound(t => 
+                                        math_exp(-1.6 * t / duration) * (1 + 0.2 * intro_noise(t)), duration));
 }
 
 function drum_exp_drop_partial(amplitude, duration) {
-    return adsr(0.02, 0, 0.99, 0)(make_sound(t => amplitude * math_exp(-1.3 * t / duration), duration));
+    // * math_sin(100 * math_sqrt(t * 2))
+    return adsr(0.05, 0, 0.9, 0)(make_sound(t => 
+                                        amplitude * math_exp(-1.6 * t / duration) * (1 + 0.2 * intro_noise(t)), duration));
 }
 
 const intro_length = note_16th * 10;
@@ -260,7 +263,10 @@ function sine_decrease_sound(start, stop, duration) {
     
     const sound_wave = t => 
                         math_sin(freq(t) * t)
-                        + 0.25 * math_sin(2 * freq(t) * t);
+                        + 0.22 * math_sin(2 * freq(t) * t)
+                        + 0.18 * math_sin(2.6 * freq(t) * t)
+                        + 0.22 * math_sin(3.33 * freq(t) * t)
+                        ;
                         
     return make_sound(sound_wave, duration);
 }
@@ -290,9 +296,11 @@ function gimme_intro(sines, drums) {
     
     // const noise_wave = t => noise_wave(t) * drum_waves(t);
     
-    const new_wave = t => drum_waves(t) * (sine_waves(t) - 0.2 * intro_noise(t));
+    const new_wave = t => drum_waves(t) * sine_waves(t);
     
-    return make_sound(new_wave, duration);
+    const new_new_wave = t => new_wave(t) + new_wave(t + 0.001);
+    
+    return make_sound(new_new_wave, duration);
 }
 
 const drum_intro = gimme_intro(intro_sine_sounds, intro_drum_envelopes);
@@ -314,7 +322,9 @@ const hh_open = cymbal_sound_rings(note_8th);
 const snare = snare_v2(note_8th);
 
 
-const tester = tom_perhaps(beat);
+const tester = some_other_drum(beat);
+
+// play(tester);
 
 
 // test_show_function();
