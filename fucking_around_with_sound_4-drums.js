@@ -238,75 +238,77 @@ function chorus(sound) {
     return make_sound(t => 0.5 * (sound_wave(t) + sound_wave(t + lfo(t))), sound_dur);
 }
 
-// make all into pairs
 
-function drum_exp_drop(duration) {
-    return adsr(0.05, 0, 0.9, 0)(make_sound(t => 
-                                        math_exp(-1.6 * t / duration) * (1 + 0.2 * intro_noise(t)), duration));
+function drum_intro() {
+    // make all into pairs
+    function drum_exp_drop(duration) {
+        return adsr(0.05, 0, 0.9, 0)(make_sound(t => 
+                                            math_exp(-1.6 * t / duration) * (1 + 0.2 * intro_noise(t)), duration));
+    }
+    
+    function drum_exp_drop_partial(amplitude, duration) {
+        // * math_sin(100 * math_sqrt(t * 2))
+        return adsr(0.05, 0, 0.9, 0)(make_sound(t => 
+                                            amplitude * math_exp(-1.6 * t / duration) * (1 + 0.2 * intro_noise(t)), duration));
+    }
+    
+    const intro_length = note_16th * 10;
+    const intro_noise = t => get_wave(noise_sound(intro_length))(t);
+    
+    function sine_decrease_sound(start, stop, duration) {
+        const start_f = start * twopi;
+        const end_f = stop * twopi;
+        const m = (end_f - start_f) / duration;
+        
+        const freq = t => m * t + start_f;
+        
+        const sound_wave = t => 
+                            math_sin(freq(t) * t)
+                            + 0.22 * math_sin(2 * freq(t) * t)
+                            + 0.18 * math_sin(2.6 * freq(t) * t)
+                            + 0.22 * math_sin(3.33 * freq(t) * t)
+                            ;
+                            
+        return make_sound(sound_wave, duration);
+    }
+    
+    const intro_sine_sounds = consecutively(list(
+                        sine_decrease_sound(270, 200, note_8th + note_16th),
+                        sine_decrease_sound(260, 210, note_8th * 2),
+                        sine_decrease_sound(230, 145, note_8th + note_16th)
+                        ));
+                                    
+    const intro_drum_envelopes = consecutively(list(
+                        drum_exp_drop(note_16th),
+                        drum_exp_drop_partial(0.6, note_8th),
+                        drum_exp_drop(note_16th),
+                        drum_exp_drop(note_16th),
+                        drum_exp_drop_partial(0.4, note_16th),
+                        drum_exp_drop_partial(0.2, note_16th),
+                        drum_exp_drop(note_16th),
+                        drum_exp_drop(note_16th),
+                        drum_exp_drop(note_16th)
+                        ));                       
+    
+    function gimme_intro(sines, drums) {
+        const duration = get_duration(drums);
+        const sine_waves = get_wave(sines);
+        const drum_waves = get_wave(drums);
+        
+        // const noise_wave = t => noise_wave(t) * drum_waves(t);
+        
+        const new_wave = t => drum_waves(t) * sine_waves(t);
+        
+        const new_new_wave = t => new_wave(t) + new_wave(t + 0.001);
+        
+        return make_sound(new_new_wave, duration);
+    }
+    
+    return gimme_intro(intro_sine_sounds, intro_drum_envelopes);
 }
 
-function drum_exp_drop_partial(amplitude, duration) {
-    // * math_sin(100 * math_sqrt(t * 2))
-    return adsr(0.05, 0, 0.9, 0)(make_sound(t => 
-                                        amplitude * math_exp(-1.6 * t / duration) * (1 + 0.2 * intro_noise(t)), duration));
-}
 
-const intro_length = note_16th * 10;
-const intro_noise = t => get_wave(noise_sound(intro_length))(t);
 
-function sine_decrease_sound(start, stop, duration) {
-    const start_f = start * twopi;
-    const end_f = stop * twopi;
-    const m = (end_f - start_f) / duration;
-    
-    const freq = t => m * t + start_f;
-    
-    const sound_wave = t => 
-                        math_sin(freq(t) * t)
-                        + 0.22 * math_sin(2 * freq(t) * t)
-                        + 0.18 * math_sin(2.6 * freq(t) * t)
-                        + 0.22 * math_sin(3.33 * freq(t) * t)
-                        ;
-                        
-    return make_sound(sound_wave, duration);
-}
-
-const intro_sine_sounds = consecutively(list(
-                    sine_decrease_sound(270, 200, note_8th + note_16th),
-                    sine_decrease_sound(260, 210, note_8th * 2),
-                    sine_decrease_sound(230, 145, note_8th + note_16th)
-                    ));
-                                
-const intro_drum_envelopes = consecutively(list(
-                    drum_exp_drop(note_16th),
-                    drum_exp_drop_partial(0.6, note_8th),
-                    drum_exp_drop(note_16th),
-                    drum_exp_drop(note_16th),
-                    drum_exp_drop_partial(0.4, note_16th),
-                    drum_exp_drop_partial(0.2, note_16th),
-                    drum_exp_drop(note_16th),
-                    drum_exp_drop(note_16th),
-                    drum_exp_drop(note_16th)
-                    ));                       
-
-function gimme_intro(sines, drums) {
-    const duration = get_duration(drums);
-    const sine_waves = get_wave(sines);
-    const drum_waves = get_wave(drums);
-    
-    // const noise_wave = t => noise_wave(t) * drum_waves(t);
-    
-    const new_wave = t => drum_waves(t) * sine_waves(t);
-    
-    const new_new_wave = t => new_wave(t) + new_wave(t + 0.001);
-    
-    return make_sound(new_new_wave, duration);
-}
-
-const drum_intro = gimme_intro(intro_sine_sounds, intro_drum_envelopes);
-
-show_waveform(drum_intro);
-play(drum_intro);
 
 
 
