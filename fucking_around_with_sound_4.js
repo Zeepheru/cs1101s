@@ -185,14 +185,19 @@ function chorus(sound) {
     const lfo_freq = 17;
     
     function lfo_creator(delay_min, delay_max) {
-        return t => (delay_max - delay_min) / 2000 * math_sin(twopi * lfo_freq * t) + delay_min * 1000;
+        const delay_range = (delay_max - delay_min) / 2000;
+        const delay_avr = (delay_max + delay_min) / 2000;
+        const ang_freq = twopi * lfo_freq;
+        
+        return t => delay_range * math_sin(ang_freq * t) + delay_avr;
     }
     
-    const lfo = lfo_creator(255, 700);
+    const lfo = lfo_creator(380, 420);
+    display(lfo);
     const sound_dur = get_duration(sound);
     const sound_wave = get_wave(sound);
     
-    return make_sound(t => sound_wave(t) + sound_wave(t + 0.4), sound_dur);
+    return make_sound(t => sound_wave(t) + sound_wave(t + lfo(t)), sound_dur);
 }
 
 // NOTE TESTING
