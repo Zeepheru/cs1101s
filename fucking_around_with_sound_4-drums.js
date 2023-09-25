@@ -231,7 +231,7 @@ function chorus(sound) {
         return t => delay_range * math_sin(ang_freq * t) + delay_avr;
     }
     
-    const lfo = lfo_creator(5, 6);
+    const lfo = lfo_creator(0, 1);
     const sound_dur = get_duration(sound);
     const sound_wave = get_wave(sound);
     
@@ -241,11 +241,11 @@ function chorus(sound) {
 // make all into pairs
 
 function drum_exp_drop(duration) {
-    return adsr(0.02, 0, 0.99, 0.05)(make_sound(t => math_exp(-1 * t / note_16th), duration));
+    return adsr(0.02, 0, 0.99, 0)(make_sound(t => math_exp(-1.3 * t / duration), duration));
 }
 
 function drum_exp_drop_partial(amplitude, duration) {
-    return adsr(0.02, 0, 0.99, 0.05)(make_sound(t => amplitude * math_exp(-1 * t / note_16th), duration));
+    return adsr(0.02, 0, 0.99, 0)(make_sound(t => amplitude * math_exp(-1.3 * t / duration), duration));
 }
 
 const intro_length = note_16th * 10;
@@ -288,9 +288,9 @@ function gimme_intro(sines, drums) {
     const sine_waves = get_wave(sines);
     const drum_waves = get_wave(drums);
     
-    const noise_wave = t => noise_wave(t) * drum_waves(t);
+    // const noise_wave = t => noise_wave(t) * drum_waves(t);
     
-    const new_wave = t => drum_waves(t) * sine_waves(t) - noise_wave(t);
+    const new_wave = t => drum_waves(t) * (sine_waves(t) - 0.2 * intro_noise(t));
     
     return make_sound(new_wave, duration);
 }
