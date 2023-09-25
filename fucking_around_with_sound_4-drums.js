@@ -222,21 +222,67 @@ function introdrum2(duration) {
     return adsr(0.01, 0.3, 0.8, 0.2)(make_sound(wave, duration));
 }
 
+// make all into pairs
+
+function drum_exp_drop(duration) {
+    return make_sound(t => math_exp(-2 * t / note_16th) * noise(t), duration);
+}
+
+function drum_exp_drop_partial(amplitude, duration) {
+    return make_sound(t => amplitude * math_exp(-2 * t / note_16th) * noise(t), duration);
+}
+
+const intro_length = note_16th * 10;
+const noise = t => get_wave(noise_sound(intro_length))(t);
+
 const id1 = introdrum2(note_8th);
 
+function sine_decrease_sound(start, stop, duration) {
+    const start_f = start * twopi;
+    const end_f = stop * twopi;
+    const m = (end_f - start_f) / duration;
+    
+    const freq = t => m * t + start_f;
+    
+    const sound_wave = t => 
+                        math_sin(freq(t) * t) + 
+                        0.25 * math_sin(2 * freq(t) * t);
+                        
+    return make_sound(sound_wave, duration);
+}
 
-
-const intro_times = list(note_16th, note_8th, note_16th, note_16th,
-                                note_16th, note_16th, note_16th, note_16th, note_16th, note_16th);
+const intro_sine_sounds = consecutively(list(
+                    sine_decrease_sound(270, 200, note_8th + note_16th),
+                    sine_decrease_sound(260, 210, note_8th * 2),
+                    sine_decrease_sound(230, 145, note_8th + note_16th)
+                    ));
                                 
-                                
+const intro_drum_envelopes = consecutively(list(
+                    drum_exp_drop(note_16th),
+                    drum_exp_drop_partial(0.6, note_8th),
+                    drum_exp_drop(note_16th),
+                    drum_exp_drop(note_16th),
+                    drum_exp_drop_partial(0.4, note_16th),
+                    drum_exp_drop_partial(0.2, note_16th),
+                    drum_exp_drop(note_16th),
+                    drum_exp_drop(note_16th),
+                    drum_exp_drop(note_16th)
+                    ));                       
 
-const test_intro = overlap_consec_times(
-                            list(id1, id1, id1, id1, id1, id1, id1, id1, id1), 
-                            intro_times);
+function gimme_intro(sines, drums) {
+    const duration = get_duration(drums);
+    const sine_waves = get_wave(sines);
+    const drum_waves = get_wave(drums);
+    
+    const new_wave = t => sine_waves(t) * drum_waves(t);
+    
+    return make_sound(new_wave, duration);
+}
 
-show_waveform(test_intro);
-play(test_intro);
+const drum_intro = gimme_intro(intro_sine_sounds, intro_drum_envelopes);
+
+show_waveform(drum_intro);
+play(drum_intro);
 
 
 
