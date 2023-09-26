@@ -40,8 +40,9 @@ function howlong(number) {
             : 1 + howlong(number / 10);
 }
 
+const make_tens = x => math_pow(10, x);
+
 function largest_v2(integer) {
-    const make_tens = x => math_pow(10, x);
     const prev = math_trunc(integer / 10);
     const now = integer % 10;
     const prev_length = howlong(prev);
