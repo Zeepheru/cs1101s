@@ -18,7 +18,6 @@ function largest(integer) {
         }
     }
     
-    
     return integer < 0
             ? helper(integer, howlong(integer) - 1, (x, y) => x <= y)
             : helper(integer, howlong(integer) - 1, (x, y) => x >= y);
