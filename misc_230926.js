@@ -34,12 +34,13 @@ function give_me_the_fucking_integer(x) {
 */
 
 const howlong = x => math_abs(x) < 1 ? 0 : 1 + howlong(x / 10);
+const how_long_but_better = x => math_floor(math_log10(math_abs(x))) + 1;
 const make_tens = x => math_pow(10, x);
 
 function largest_v2(integer) {
     const prev = math_trunc(integer / 10);
     const now = integer % 10;
-    const prev_length = howlong(prev);
+    const prev_length = how_long_but_better(prev);
     
     if (prev_length === 0) {
         return now;
