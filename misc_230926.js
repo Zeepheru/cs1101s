@@ -53,7 +53,6 @@ function largest_v2(integer) {
     } else {
         return largest_v2(prev) * 10 + now;
     }
-
 }
 
 
