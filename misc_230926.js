@@ -23,6 +23,15 @@ function largest(integer) {
             ? helper(integer, howlong(integer) - 1, (x, y) => x <= y)
             : helper(integer, howlong(integer) - 1, (x, y) => x >= y);
 }
+
+function give_me_the_fucking_integer(x) {
+    // So that gmtfi(1.1) === 1 && gmtfi(-1.1) === -1
+    // Basically, same result as calling int() on a float in Python
+    return x < 0
+            ? math_ceil(x)
+            : math_floor(x);
+    // Nvm math_trunc exists :)
+}
 */
 
 function howlong(number) {
@@ -31,17 +40,9 @@ function howlong(number) {
             : 1 + howlong(number / 10);
 }
 
-function give_me_the_fucking_integer(x) {
-    // So that gmtfi(1.1) === 1 && gmtfi(-1.1) === -1
-    // Basically, same result as calling int() on a float in Python
-    return x < 0
-            ? math_ceil(x)
-            : math_floor(x);
-}
-
 function largest_v2(integer) {
     const make_tens = x => math_pow(10, x);
-    const prev = give_me_the_fucking_integer(integer / 10);
+    const prev = math_trunc(integer / 10);
     const now = integer % 10;
     const prev_length = howlong(prev);
     
