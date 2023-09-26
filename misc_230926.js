@@ -34,11 +34,7 @@ function give_me_the_fucking_integer(x) {
 }
 */
 
-function howlong(number) {
-    return math_abs(number) < 1
-            ? 0
-            : 1 + howlong(number / 10);
-}
+const howlong = (number) => math_abs(number) < 1 ? 0 : 1 + howlong(number / 10);
 
 const make_tens = x => math_pow(10, x);
 
