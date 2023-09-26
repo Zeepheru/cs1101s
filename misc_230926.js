@@ -1,9 +1,4 @@
-function howlong(number) {
-    return math_abs(number) < 1
-            ? 0
-            : 1 + howlong(number / 10);
-}
-
+/*
 function largest(integer) {
     const make_tens = x => math_pow(10, x);
     
@@ -27,6 +22,13 @@ function largest(integer) {
     return integer < 0
             ? helper(integer, howlong(integer) - 1, (x, y) => x <= y)
             : helper(integer, howlong(integer) - 1, (x, y) => x >= y);
+}
+*/
+
+function howlong(number) {
+    return math_abs(number) < 1
+            ? 0
+            : 1 + howlong(number / 10);
 }
 
 function give_me_the_fucking_integer(x) {
