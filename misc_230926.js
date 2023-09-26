@@ -32,6 +32,8 @@ function howlong(number) {
 }
 
 function give_me_the_fucking_integer(x) {
+    // So that gmtfi(1.1) === 1 && gmtfi(-1.1) === -1
+    // Basically, same result as calling int() on a float in Python
     return x < 0
             ? math_ceil(x)
             : math_floor(x);
