@@ -21,6 +21,16 @@ function factorial(n) {
     }
     return result;
 }
+
+// FOR BABY
+function factorial_for(n) {
+    let i = undefined;
+    let result = 1;
+    while (i = 1; i <= n; i = i + 1) {
+        result = result * i;
+    }
+    return result;
+}
 /*
 note:
 E1 && E2 => E1 ? E2 : false
