@@ -9,6 +9,7 @@ x = x -1;
 // assignment is still not allowed. 
 const a = pair(1, 2);
 set_head(a, 2);
+set_tail(a, 1);
 a;
 
 // WHILE LOOP LFG
