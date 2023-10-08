@@ -40,3 +40,13 @@ note:
 E1 && E2 => E1 ? E2 : false
 E1 || E2 => E1 ? true : E2
 */
+
+//  destructive append
+function d_append(xs, ys) {
+    if (is_null(xs)) {
+        return ys;
+    } else {
+        set_tail(xs, d_append(tail(xs), ys));
+        return xs;
+    }
+}
