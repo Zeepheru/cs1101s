@@ -26,7 +26,10 @@ function factorial(n) {
 function factorial_for(n) {
     let i = undefined;
     let result = 1;
+    
+    // int instruction evals first. 
     for (i = 1; i <= n; i = i + 1) {
+        // inc expression evaluates after each boy eval
         result = result * i;
     }
     return result;
