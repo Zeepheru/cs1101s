@@ -50,3 +50,10 @@ function d_append(xs, ys) {
         return xs;
     }
 }
+
+function d_map(f, xs) {
+    if (!is_null(xs)) {
+        set_head(xs, f(head(xs)));
+        d_map(f, tail(xs));
+    } else {}
+}
