@@ -21,3 +21,8 @@ function factorial(n) {
     }
     return result;
 }
+/*
+note:
+E1 && E2 => E1 ? E2 : false
+E1 || E2 => E1 ? true : E2
+*/
