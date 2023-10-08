@@ -26,7 +26,7 @@ function factorial(n) {
 function factorial_for(n) {
     let i = undefined;
     let result = 1;
-    while (i = 1; i <= n; i = i + 1) {
+    for (i = 1; i <= n; i = i + 1) {
         result = result * i;
     }
     return result;
