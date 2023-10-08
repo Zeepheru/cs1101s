@@ -41,7 +41,7 @@ E1 && E2 => E1 ? E2 : false
 E1 || E2 => E1 ? true : E2
 */
 
-//  destructive append
+//  destructive append, map
 function d_append(xs, ys) {
     if (is_null(xs)) {
         return ys;
