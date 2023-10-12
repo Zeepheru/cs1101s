@@ -121,7 +121,7 @@ function neutral_turn_to_angle(direction, angle) {
     const angle_adjust_factor = 1;
     const v_linear = math_PI / 180 * half_track_width * turnrate_default;
     const motor_speed = convert_to_motor_speed(v_linear);
-    const run_time = (math_PI * half_track_width * theta / 180 / v_linear * 1000) 
+    const run_time = (math_PI * half_track_width * angle / 180 / v_linear * 1000) 
                         * angle_adjust_factor ;
     
     if (direction === "left") {
