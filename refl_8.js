@@ -41,3 +41,10 @@ function make_price_calculator(tax_rate) {
 const calc = make_price_calculator(0.07);
 commission = 125;
 calc(75);
+
+// Q3
+function curry(f) {
+    return x => f => f(x, y);
+}
+
+(curry(math_pow))(3)(4);
