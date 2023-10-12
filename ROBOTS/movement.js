@@ -40,6 +40,7 @@ function console_log(msg) {
 }
 
 function pause(t) {
+    // t is in ms.
     total_time = total_time + t / 1000;
     ev3_pause(t);
 }
