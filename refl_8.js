@@ -1,24 +1,24 @@
 // Q1
-function make_withdraw(balance, password) {
-    // much secure
-    const acc_password = password;
-    let remaining_incorrect_tries = 3;
+// function make_withdraw(balance, password) {
+//     // much secure
+//     const acc_password = password;
+//     let remaining_incorrect_tries = 3;
     
-    function withdraw(amount, password) {
-        if (remaining_incorrect_tries <= 0) {
-            return "Account disabled";
-        } else if (acc_password !== password) {
-            remaining_incorrect_tries = remaining_incorrect_tries - 1;
-            return "Wrong password; no withdraw";
-        } else if (balance < amount) {
-            return "Insufficient funds";
-        } else {
-            balance = balance - amount;
-            return balance;
-        }
-    }
-    return withdraw;
-}
+//     function withdraw(amount, password) {
+//         if (remaining_incorrect_tries <= 0) {
+//             return "Account disabled";
+//         } else if (acc_password !== password) {
+//             remaining_incorrect_tries = remaining_incorrect_tries - 1;
+//             return "Wrong password; no withdraw";
+//         } else if (balance < amount) {
+//             return "Insufficient funds";
+//         } else {
+//             balance = balance - amount;
+//             return balance;
+//         }
+//     }
+//     return withdraw;
+// }
 
 // const acc = make_withdraw(100, "my_password");
 // acc(30, "his_passcode"); // returns "Wrong password; no withdraw"
