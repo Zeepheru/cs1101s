@@ -1,7 +1,7 @@
 // Q1
-function make_withdraw(balance, password) {
+function make_withdraw(balance, acc_password) {
     // much secure
-    const acc_password = password;
+    // const acc_password = password;
     let remaining_incorrect_tries = 3;
     
     function withdraw(amount, password) {
@@ -11,8 +11,10 @@ function make_withdraw(balance, password) {
             remaining_incorrect_tries = remaining_incorrect_tries - 1;
             return "Wrong password; no withdraw";
         } else if (balance < amount) {
+            remaining_incorrect_tries = 3; // here as well yes
             return "Insufficient funds";
         } else {
+            remaining_incorrect_tries = 3; // ???? - yes
             balance = balance - amount;
             return balance;
         }
