@@ -5,6 +5,7 @@ import { sail, rcross, heart, nova, corner, pentagram, square,
          beside_frac, scale_independent }
 from 'rune';
 
+
 function test1(rune) {
     return 1;
 }
