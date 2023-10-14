@@ -90,8 +90,8 @@ function start_motors() {
 function stop_motors() {
     // Stops both motors. Convenience function. 
     verbose_log("Stopping both motors.");
-    ev3_motorStart(motorL);
-    ev3_motorStart(motorR);
+    ev3_motorStop(motorL);
+    ev3_motorStop(motorR);
 }
 
 function move(v) {
@@ -185,7 +185,7 @@ function question2() {
     }
     
     brake();
-    console_log_timed("Reached 10 cm from obstacle. Reversing...")
+    console_log_timed("Reached 10 cm from obstacle. Reversing...");
     move_distance_and_stop(-v_default, 30);
 }
 
