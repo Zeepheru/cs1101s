@@ -16,7 +16,6 @@ function subsets(xs) {
         return list(null);
     } else {
         const no_subsets = subsets(tail(xs));
-        
         const yes_subsets = map(x => pair(head(xs), x), subsets(tail(xs)));
         
         return append(no_subsets, yes_subsets);
