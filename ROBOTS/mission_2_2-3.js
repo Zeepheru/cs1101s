@@ -271,13 +271,14 @@ function question3() {
 
 function question3_inf() {
     init_motor_defaults();
+    move(v_default);
     
     while (true) {
-        move(v_default);
         if (check_dist_and_log() <= 10) {
             pause(distance_sample_period);
         } else {
             collision_avoidance();
+            move(v_default);
         }
     }
 }
