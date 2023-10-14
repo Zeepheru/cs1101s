@@ -14,6 +14,7 @@ const wheel_r = 2.6;
 const half_track_width = 6; // half dist btwn centrelines of wheels
 
 const gear_ratio = 1;
+const distance_ratio = 1;
 
 let verbose = true;
 const v_default = 20;
@@ -158,7 +159,7 @@ function neutral_turn_to_angle(direction, angle) {
 function check_dist_and_log() {
     // Updates, logs, and returns the current value of the distance
     // in front of the ultrasonic sensor in cm. 
-    ultrasonic_dist = ev3_ultrasonicSensorDistance(ultrasonicSensor);
+    ultrasonic_dist = distance_ratio * ev3_ultrasonicSensorDistance(ultrasonicSensor);
     console_log("[Ultrasonic: " + stringify(ultrasonic_dist) + " cm]");
     
     return ultrasonic_dist;
