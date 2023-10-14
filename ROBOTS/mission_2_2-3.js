@@ -14,7 +14,7 @@ const wheel_r = 2.6;
 const half_track_width = 6; // half dist btwn centrelines of wheels
 
 const gear_ratio = 1;
-const distance_ratio = 1;
+const distance_ratio = 0.1;
 
 let verbose = true;
 const v_default = 20;

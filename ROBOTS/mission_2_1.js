@@ -2,7 +2,7 @@
 ev3_speak("program running");
 
 const us = ev3_ultrasonicSensor();
-const distance_ratio = 1;
+const distance_ratio = 0.1;
 
 
 while (true) {
