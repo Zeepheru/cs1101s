@@ -14,3 +14,5 @@ const test_ans = d_filter(x => x % 2 === 0, L); // returns [2, [4, [6, [8, null]
 // L; // What is L now?
 
 test_ans;
+
+// Q3
