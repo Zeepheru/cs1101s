@@ -1,3 +1,15 @@
+// Q1
+// function change(x, new_value) {
+//     x = new_value;
+// }
+// let x = 0;
+// change(x, 1);
+/*
+x = 0
+x is substituted replaced by 0, not the reference to the 
+original x when change(x, 1) is called. 
+*/
+
 function d_filter(pred, xs) {
     if (is_null(xs)) {
         return xs;
