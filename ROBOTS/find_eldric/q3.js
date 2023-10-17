@@ -1,4 +1,4 @@
-// ev3_speak("program running");
+// I'm sorry for the complicated code :)
 
 // init variables
 const motorL = ev3_motorA();
@@ -126,6 +126,9 @@ function opposite_direction() {
     return turn_direction;
 }
 
+function get_current_status() {
+    return tail(path_status);
+}
 
 // Question 3
 function question3() {
@@ -135,8 +138,6 @@ function question3() {
     ev3_pause(100);
     
     while (true) {
-        // check_brightness_and_log();
-        
         if (check_quit()) { break;}
 
         if (check_turn()) {
@@ -147,12 +148,12 @@ function question3() {
         }
         
         if (!is_turning()) {
-            if (reverse_correction_turn && !tail(path_status)) {
+            if (reverse_correction_turn && !get_current_status()) {
                 display("Maze complete!");
                 break;
             }
             
-            if (tail(path_status)) {
+            if (get_current_status()) {
                 maze_turn_to_angle(turn_direction, 90);
             }
             else {
@@ -164,7 +165,6 @@ function question3() {
         check_path();
         ev3_pause(25);
     }
-    
 }
 
 

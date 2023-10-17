@@ -1,4 +1,4 @@
-// ev3_speak("program running");
+// I'm sorry for the complicated code :)
 
 // init variables
 const motorL = ev3_motorA();
