@@ -1,4 +1,5 @@
 // I'm sorry for the complicated code :)
+// ~Zee Hang
 
 // init variables
 const motorL = ev3_motorA();
@@ -58,13 +59,13 @@ function move(v) {
 }
 
 function maze_turn_to_angle(direction, angle) {
-    display(["Starting turn at", angle, "°/s to the " + direction]);
+    display(["Starting turn to", angle, "° to the " + direction]);
     const angle_adjust_factor = 1;
     const v_linear = math_PI / 180 * half_track_width * turnrate_default;
     const motor_speed = convert_to_motor_speed(v_linear);
     const run_time = (math_PI * half_track_width * angle / 180 / v_linear * 1000) * angle_adjust_factor;
     
-    const alt_speed = 0.4 * convert_to_motor_speed(v_linear);
+    const alt_speed = 0.6 * convert_to_motor_speed(v_linear);
     
     if (direction === "left") {
         ev3_runForTime(motorL, run_time, -alt_speed);
@@ -82,7 +83,7 @@ function reverse_maze_turn_to_angle(direction, angle) {
     const motor_speed = convert_to_motor_speed(v_linear);
     const run_time = (math_PI * half_track_width * angle / 180 / v_linear * 1000) * angle_adjust_factor;
     
-    const alt_speed = 0.4 * convert_to_motor_speed(v_linear);
+    const alt_speed = 0.5 * convert_to_motor_speed(v_linear);
     
     if (direction === "left") {
         ev3_runForTime(motorL, run_time, -motor_speed);
@@ -101,6 +102,7 @@ function is_turning() {
 let path_status = pair(false, false);
 let turn_direction = "left";
 let reverse_correction_turn = false;
+let minor_rct_count = 0;
 
 function check_quit() {
     return ev3_touchSensorPressed(touch1);
@@ -127,6 +129,7 @@ function opposite_direction() {
 }
 
 function get_current_status() {
+    display(tail(path_status));
     return tail(path_status);
 }
 
@@ -141,10 +144,11 @@ function question3() {
         if (check_quit()) { break;}
 
         if (check_turn()) {
+            minor_rct_count = 0;
             reverse_correction_turn = false;
             display("Off path. Turn initiated.");
             stop_motors();
-            maze_turn_to_angle(opposite_direction(), 90);
+            maze_turn_to_angle(opposite_direction(), 40);
         }
         
         if (!is_turning()) {
@@ -152,18 +156,25 @@ function question3() {
                 display("Maze complete!");
                 break;
             }
+            ev3_pause(50);
             
             if (get_current_status()) {
-                maze_turn_to_angle(turn_direction, 90);
-            }
-            else {
+                display("Back on path, turning back.");
+                maze_turn_to_angle(turn_direction, 20);
+            } else if (minor_rct_count < 2) {
+                minor_rct_count = minor_rct_count + 1;
+                display("Minor reverse correction turn.");
+                reverse_maze_turn_to_angle(opposite_direction(), 20);
+            } else {
+                minor_rct_count = 0;
+                display("Reverse correction turn.");
                 reverse_correction_turn = true;
-                reverse_maze_turn_to_angle(opposite_direction(), 135);
+                maze_turn_to_angle(opposite_direction(), 90);
             }
         }
         
         check_path();
-        ev3_pause(25);
+        ev3_pause(50);
     }
 }
 

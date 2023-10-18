@@ -1,4 +1,5 @@
 // I'm sorry for the complicated code :)
+// ~Zee Hang
 
 // init variables
 const motorL = ev3_motorA();
@@ -123,7 +124,7 @@ function question2() {
         if (check_turn()) {
             display("Off path. Turn initiated.");
             stop_motors();
-            maze_turn_to_angle(opposite_direction(), 90);
+            maze_turn_to_angle(opposite_direction(), 45);
         }
         
         check_path();
