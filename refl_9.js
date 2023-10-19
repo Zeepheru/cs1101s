@@ -31,11 +31,7 @@ function make_optimized_search_v2(A) {
     
     merge_sort(array_dupl);
     
-    function memoized_search(x) {
-        linear_search(array_dupl, x);
-    }
-    
-    return memoized_search;
+    return x => linear_search(array_dupl, x);
 }
 
 // test cases
