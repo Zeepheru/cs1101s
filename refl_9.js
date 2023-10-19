@@ -21,6 +21,23 @@ function make_optimized_search(A) {
     return memoized_search;
 }
 
+function make_optimized_search_v2(A) {
+    // most optimized, n log n
+    const array_dupl = [];
+    
+    for (let i = 1; i < n; i = i + 1) {
+        array_dupl[i] = A[i];
+    }
+    
+    merge_sort(array_dupl);
+    
+    function memoized_search(x) {
+        linear_search(array_dupl, x);
+    }
+    
+    return memoized_search;
+}
+
 // test cases
 // const my_array = [1, 2, 4, 5];
 // const my_arr_search = make_optimized_search(my_array);
@@ -32,7 +49,8 @@ function make_optimized_search(A) {
 function fib(n) {
     const fib_res = [0, 1];
     
-    for (let i = 2; i <= n; i = i + 1) {
+    for (let i = 2; i < n + 1; i = i + 1) {
+        // or lte is better
         fib_res[i] = fib_res[i - 1] + fib_res[i - 2];
     }
     
@@ -52,6 +70,9 @@ function fib_alt(n) {
         const temp = pp + p;
         pp = p;
         p = temp;
+        // or more big brain
+        // p = p + pp;
+        // pp = p - pp;
     }
     
     return p;
