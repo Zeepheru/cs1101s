@@ -62,3 +62,4 @@ function fib_alt(n) {
 // display(fib_alt(14));
 
 // QUESTION 3
+// lazy, so neigh
