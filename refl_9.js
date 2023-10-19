@@ -29,7 +29,6 @@ function make_optimized_search(A) {
 // display(my_arr_search(2));
 
 // QUESTION 2
-
 function fib(n) {
     const fib_res = [0, 1];
     
@@ -43,7 +42,7 @@ function fib(n) {
 
 function fib_alt(n) {
     if (n < 2) {
-        return n < 1 ? 0 : 1;
+        return n;
     }
     
     let pp = 0;
