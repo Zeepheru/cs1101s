@@ -85,10 +85,10 @@ function cc_memoized(amt) {
                 cc_mem[amt] = [];
             }
             
-            const changes = cc(amt, coin - 1)
+            const next = cc(amt, coin - 1)
                             + cc(amt - denoms[coin], coin);
-            cc_mem[amt][coin] = changes;
-            return changes;
+            cc_mem[amt][coin] = next;
+            return next;
         }
     }
     
