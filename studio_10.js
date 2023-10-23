@@ -30,6 +30,7 @@ reverse_array(arr);
 arr;*/
 
 // question 2
+// bubble sort involves moving the second pointer forward each iteration.
 
 /*function swap_adj(L) {
     // note on whether the return statements are necessary when assigning?
