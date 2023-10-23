@@ -31,7 +31,7 @@ arr;*/
 
 // question 2
 
-function swap_adj(L) {
+/*function swap_adj(L) {
     // note on whether the return statements are necessary when assigning?
     if (is_null(tail(L))) {
         return L;
@@ -60,5 +60,40 @@ function bubblesort_list(L) {
 const LL = list(3, 5, 2, 4, 1);
 
 bubblesort_list(LL);
-LL;
+LL;*/
 
+// question 3
+
+
+
+
+function cc_memoized(amt) {
+    const denoms = [0, 5, 10, 20, 50, 100];
+    const cc_mem = [];
+    // const amt_lookup = [];
+    
+    function cc(amt, coin) {
+        if (amt === 0) {
+            return 1;
+        } else if (coin <= 0 || amt < 0) {
+            return 0;
+        } else {
+            if (cc_mem[amt] !== undefined) {
+                if (cc_mem[amt][coin] !== undefined) {
+                    return cc_mem[amt][coin];
+                }
+            } else {
+                cc_mem[amt] = [];
+            }
+            
+            const changes = cc(amt, coin - 1)
+                            + cc(amt - denoms[coin], coin);
+            cc_mem[amt][coin] = changes;
+            return changes;
+        }
+    }
+    
+    return cc(amt, array_length(denoms) - 1);
+}
+
+cc_memoized(100);
