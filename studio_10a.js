@@ -26,7 +26,7 @@ function rotate(M) {
             const i0 = i - mid;
             const j0 = j - mid;
             
-            let theta = math_atan(i0 / j0);
+            let theta = math_atan(j0 / i0);
             theta = j0 === 0 ? 0 : theta;
             
             const point_r = math_sqrt(i0 * i0 + j0 * j0);
