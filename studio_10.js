@@ -32,6 +32,8 @@ arr;*/
 // question 2
 // bubble sort involves moving the second pointer forward each iteration.
 // since everytime the largest element should be moved to the back
+// so yeah in this case, also copy the exact implementation 
+// (just use the for loops :)
 
 /*function swap_adj(L) {
     // note on whether the return statements are necessary when assigning?
