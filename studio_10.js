@@ -70,7 +70,6 @@ LL;*/
 function cc_memoized(amt) {
     const denoms = [0, 5, 10, 20, 50, 100];
     const cc_mem = [];
-    // const amt_lookup = [];
     
     function cc(amt, coin) {
         if (amt === 0) {
