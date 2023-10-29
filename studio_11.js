@@ -45,9 +45,9 @@ function add_streams(s1, s2) {
                 () => add_streams(stream_tail(s1),
                 stream_tail(s2)));
 }
-function scale_stream(c, stream) {
-    return stream_map(x => c * x, stream);
-}
+// function scale_stream(c, stream) {
+//     return stream_map(x => c * x, stream);
+// }
 const add_series = add_streams;
 const scale_series = scale_stream;
 function negate_series(s) {
@@ -73,3 +73,5 @@ function fun_to_series(fun) {
     return stream_map(fun, non_neg_integers);
 }
 
+const alt_ones_a = stream_map(n => n % 2 === 0 ? -1 : 1, integers);
+stream_to_list_n(alt_ones_a, 10);
