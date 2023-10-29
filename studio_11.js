@@ -11,6 +11,19 @@ function stream_to_list_n(S, n) {
     }
 }
 
+function stream_to_array_n(S, n) {
+    const arr = [];
+    
+    for (let i = 0; i < n, i = i + 1) {
+        let value = stream_ref(S, i);
+        if (value === undefined) {
+            break;
+        } else {
+            arr[i] = value;
+        }
+    }
+}
+
 function increment_stream(n) {
     return pair(n, () => increment_stream(n + 1));
 }
