@@ -31,8 +31,8 @@ function mul_streams(a,b) {
 }
 const B = pair(1, () => mul_streams(B, integers));
 
-stream_to_list_n(A, 10);
-stream_to_list_n(B, 10);
+// stream_to_list_n(A, 10);
+// stream_to_list_n(B, 10);
 
 // QUESTION 2
 // basic operations
@@ -72,3 +72,4 @@ function coeffs_to_series(list_of_coeffs) {
 function fun_to_series(fun) {
     return stream_map(fun, non_neg_integers);
 }
+
