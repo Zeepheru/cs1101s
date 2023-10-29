@@ -73,5 +73,6 @@ function fun_to_series(fun) {
     return stream_map(fun, non_neg_integers);
 }
 
+// alt_ones
 const alt_ones_a = stream_map(n => n % 2 === 0 ? -1 : 1, integers);
 stream_to_list_n(alt_ones_a, 10);
