@@ -1,11 +1,22 @@
+// STUDIO ELEVEN 11 ELEVEN
+// STUDIO ELEVEN 11 ELEVEN
+// STUDIO ELEVEN 11 ELEVEN
+
 // Miscellany
 function stream_to_list_n(S, n) {
     if (n === 0 || is_null(head(S))) {
         return null;
     } else {
-        return pair(head(S), stream_to_list(stream_tail(S), n - 1));
+        return pair(head(S), stream_to_list_n(stream_tail(S), n - 1));
     }
 }
+
+function increment_stream(n) {
+    return pair(n, () => increment_stream(n + 1));
+}
+
+const integers = increment_stream(1);
+const non_neg_integers = increment_stream(0);
 
 // QUESTION 1
 function scale_stream(c, stream) {
