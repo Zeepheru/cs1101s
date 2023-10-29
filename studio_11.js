@@ -14,7 +14,7 @@ function stream_to_list_n(S, n) {
 function stream_to_array_n(S, n) {
     const arr = [];
     
-    for (let i = 0; i < n, i = i + 1) {
+    for (let i = 0; i < n; i = i + 1) {
         let value = stream_ref(S, i);
         if (value === undefined) {
             break;
@@ -22,6 +22,7 @@ function stream_to_array_n(S, n) {
             arr[i] = value;
         }
     }
+    return arr;
 }
 
 function increment_stream(n) {
@@ -89,7 +90,7 @@ function fun_to_series(fun) {
 // QUESTION 2 TASKS
 // alt_ones
 const alt_ones_a = stream_map(n => n % 2 === 0 ? -1 : 1, integers);
-const alt_ones_b = stream_map(n => n % 2 === 0 ? -1 : 1, integers);
+const alt_ones_b = stream_map(n => math_pow(-1, n - 1), integers); // defo inefficient
 
 
 // zeroes
