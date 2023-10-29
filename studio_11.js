@@ -73,6 +73,12 @@ function fun_to_series(fun) {
     return stream_map(fun, non_neg_integers);
 }
 
+// QUESTION 2 TASKS
 // alt_ones
 const alt_ones_a = stream_map(n => n % 2 === 0 ? -1 : 1, integers);
-stream_to_list_n(alt_ones_a, 10);
+
+
+// zeroes
+const zeros_a = stream_map(n => 0, alt_ones_a);
+
+stream_to_list_n(zeros_a, 10);
