@@ -94,8 +94,11 @@ const alt_ones_b = stream_map(n => math_pow(-1, n - 1), integers); // defo ineff
 function ao_c(i) { return pair(i, () => ao_c(-i)); }
 const alt_ones_c = ao_c(1);
 
-// zeroes
-const zeros_a = stream_map(n => 0, alt_ones_a);
-const zeros_b = stream_map(n => n - n, alt_ones_a);
+let alt_ones = alt_ones_c;
 
-stream_to_list_n(alt_ones_c, 10);
+// zeroes
+const zeros_a = stream_map(n => 0, alt_ones);
+const zeros_b = stream_map(n => n - n, alt_ones);
+const zeros_c = add_streams(alt_ones, scale_stream(-1, alt_ones));
+
+stream_to_list_n(zeros_c, 10);
