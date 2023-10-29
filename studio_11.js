@@ -91,10 +91,11 @@ function fun_to_series(fun) {
 // alt_ones
 const alt_ones_a = stream_map(n => n % 2 === 0 ? -1 : 1, integers);
 const alt_ones_b = stream_map(n => math_pow(-1, n - 1), integers); // defo inefficient
-
+function ao_c(i) { return pair(i, () => ao_c(-i)); }
+const alt_ones_c = ao_c(1);
 
 // zeroes
 const zeros_a = stream_map(n => 0, alt_ones_a);
 const zeros_b = stream_map(n => n - n, alt_ones_a);
 
-stream_to_list_n(alt_ones_b, 10);
+stream_to_list_n(alt_ones_c, 10);
