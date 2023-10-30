@@ -88,6 +88,7 @@ function fun_to_series(fun) {
 }
 
 // QUESTION 2 TASKS
+// I mean, imma give some of the more "practical" methods?
 // alt_ones
 const alt_ones_a = stream_map(n => n % 2 === 0 ? -1 : 1, integers);
 const alt_ones_b = stream_map(n => math_pow(-1, n - 1), integers); // defo inefficient
@@ -102,3 +103,7 @@ const zeros_b = stream_map(n => n - n, alt_ones);
 const zeros_c = add_streams(alt_ones, scale_stream(-1, alt_ones));
 
 stream_to_list_n(zeros_c, 10);
+
+// errrr, the serieses that need to be defined??
+const S_1 = stream_map(x => 1, integers);
+const S_2 = integers;
