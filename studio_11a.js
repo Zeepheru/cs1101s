@@ -82,6 +82,8 @@ function interleave_append(xs, ys) {
 }
 
 function stream_pairs4(s) {
+    // it's "pretty cool"
+    // but no one has any idea how to explain it.
     return (is_null(s) || is_null(stream_tail(s)))
             ? is_null
             : pair(pair(head(s), head(stream_tail(s))),
