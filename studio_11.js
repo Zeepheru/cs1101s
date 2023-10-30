@@ -26,6 +26,7 @@ function stream_to_array_n(S, n) {
 }
 
 function increment_stream(n) {
+    // same as integers_from() lol
     return pair(n, () => increment_stream(n + 1));
 }
 
