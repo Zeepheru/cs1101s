@@ -96,6 +96,7 @@ const alt_ones_a = stream_map(n => n % 2 === 0 ? -1 : 1, integers);
 const alt_ones_b = stream_map(n => math_pow(-1, n - 1), integers); // defo inefficient
 function ao_c(i) { return pair(i, () => ao_c(-i)); }
 const alt_ones_c = ao_c(1);
+const alt_ones_d = pair(1, () => pair(-1, () => alt_ones_d));
 
 let alt_ones = alt_ones_c;
 
