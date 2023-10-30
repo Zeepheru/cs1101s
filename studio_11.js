@@ -45,6 +45,7 @@ function mul_streams(a,b) {
                 () => mul_streams(stream_tail(a), stream_tail(b)));
 }
 const B = pair(1, () => mul_streams(B, integers));
+// stream of factorials.
 
 // stream_to_list_n(A, 10);
 // stream_to_list_n(B, 10);
@@ -108,3 +109,7 @@ stream_to_list_n(zeros_c, 10);
 // errrr, the serieses that need to be defined??
 const S_1 = stream_map(x => 1, integers);
 const S_2 = integers;
+
+
+stream_to_list_n(B, 10);
+
