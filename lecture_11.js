@@ -26,7 +26,7 @@ function literal_value(comp) {
     return head(tail(comp));
 }
 
-
+// CS Machine for calc expressions
 function evaluate(expr) {
     // C & S
     let C = list(expr);
