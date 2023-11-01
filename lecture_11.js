@@ -26,9 +26,13 @@ function literal_value(comp) {
     return head(tail(comp));
 }
 
-// Binary Operator
+// Misc
 const is_bin_op_combination = comp =>
 is_tagged_list(comp,"binary_operator_combination");
+
+const operator_symbol = comp => list_ref(comp ,1);
+const first_operand = comp => list_ref(comp ,2);
+const second_operand = comp => list_ref(comp ,3);
 
 // CS Machine for calc expressions
 function evaluate(expr) {
@@ -40,9 +44,29 @@ function evaluate(expr) {
         if (is_literal(command)) {
             S = pair(literal_value(command), S);
             
-        } else if (...) { // handle all other commands
-        
+        } else if (is_bin_op_combination(command)) {
+            C = pair(first_operand(command),
+                    pair(second_operand(command),
+                        pair(make_bin_op_instr(
+                                operator_symbol(command)),
+                            C)));
+        } else if (is_bin_op_instr(command)) {
+            S = pair(apply_binary(op_instr_symbol(command),
+                                head(tail(S)), head(S)),
+                    tail(tail(S)));
         } else { error("unknown command"); }
     }
     return head(S);
+}
+
+function apply_binary(operator , op1, op2) {
+    return operator === "+"
+            ? op1 + op2
+            : operator === "-"
+            ? op1 - op2
+            : operator === "*"
+            ? op1 * op2
+            : operator === "/"
+            ? op1 / op2
+            : error("unknown operator");
 }
