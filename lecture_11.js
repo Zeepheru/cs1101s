@@ -43,7 +43,6 @@ function evaluate(expr) {
         const command = head(C); C = tail(C);
         if (is_literal(command)) {
             S = pair(literal_value(command), S);
-            
         } else if (is_bin_op_combination(command)) {
             C = pair(first_operand(command),
                     pair(second_operand(command),
