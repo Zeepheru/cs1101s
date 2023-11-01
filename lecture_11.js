@@ -14,6 +14,7 @@ list("binary_operator_combination",
 */
 
 
+// Literals
 function is_literal(comp) {
     return is_tagged_list(comp, "literal");
 }
@@ -23,4 +24,21 @@ function is_tagged_list(comp, the_tag) {
 // selector , in the following in blue
 function literal_value(comp) {
     return head(tail(comp));
+}
+
+
+function evaluate(expr) {
+    // C & S
+    let C = list(expr);
+    let S = null;
+    while (! is_null(C)) {
+        const command = head(C); C = tail(C);
+        if (is_literal(command)) {
+            S = pair(literal_value(command), S);
+            
+        } else if (...) { // handle all other commands
+        
+        } else { error("unknown command"); }
+    }
+    return head(S);
 }
