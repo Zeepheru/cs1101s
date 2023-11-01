@@ -26,6 +26,10 @@ function literal_value(comp) {
     return head(tail(comp));
 }
 
+// Binary Operator
+const is_bin_op_combination = comp =>
+is_tagged_list(comp,"binary_operator_combination");
+
 // CS Machine for calc expressions
 function evaluate(expr) {
     // C & S
