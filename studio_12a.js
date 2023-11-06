@@ -809,6 +809,7 @@ function lookup_symbol_value(symbol, env) {
 }
 
 function assign_symbol_value(symbol, val, env) {
+    // CHANGES? Alternatively, do this here::
     function env_loop(env) {
         function scan(symbols, vals) {
             return is_null(symbols)
