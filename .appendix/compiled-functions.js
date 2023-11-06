@@ -78,6 +78,31 @@ function count_pairs_alt(xs) {
     return length(pairs);
 }
 
+// LIST - ARRAY Converters
+function list_to_array(xs) {
+    const A = [];
+    let i = 0;
+    while (!is_null(xs)) {
+        A[i] = head(xs);
+        xs = tail(xs);
+        i = i + 1;
+    }
+    
+    return A;
+}
+
+function array_to_list(A) {
+    function helper(i) {
+        if (A[i] === undefined) {
+            return null;
+        } else {
+            return pair(A[i], helper(i + 1));
+        }
+    }
+    
+    return helper(0);
+}
+
 // Array Ops
 function array_map(f, A) {
     // destructive and returns
@@ -181,6 +206,8 @@ function stream_to_array_n(S, n) {
             arr[i] = value;
         }
     }
+
+    display(arr);
     return arr;
 }
 
@@ -195,5 +222,9 @@ A[len - i - 1];
 // check if x is in list xs
 if (!is_null(member(x, xs))) { }
 
+// Array traversal
+for (let i = 0; i < len; i = i + 1) { }
 
-// add both 1d and 2d array traversal for loops
+for (let i = 0; i < len_x; i = i + 1) {
+    for (let j = 0; j < len_y; j = j + 1) { }
+}
