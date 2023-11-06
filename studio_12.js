@@ -949,6 +949,8 @@ function reorder_sequence(seq) {
     const functions_seq = filter(x => is_function_declaration(x), seq);
     const other_seq = filter(x => !is_function_declaration(x), seq);
     
+    // apparently u need to pop lol
+    
     return append(functions_seq, other_seq);
 }
 
