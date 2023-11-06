@@ -13,8 +13,7 @@ functional programming language, including:
 Examples at the end of the program
 */
 
-// CHANGES
-const unassigned = [];
+
 
 function evaluate(program) { 
     let C = list(make_block(program));
@@ -268,8 +267,12 @@ function scan_out_declarations(component) {
            : null;
 }
 
+// CHANGES
+const unassigned = [];
+
 function list_of_unassigned(symbols) {
     // CHANGES
+    // use a unique reference value rather than some value (eg undefined)
     return map(symbol => unassigned, symbols);
 }
 
