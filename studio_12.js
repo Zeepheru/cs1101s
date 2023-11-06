@@ -945,7 +945,7 @@ function parse_and_evaluate(string) {
 
 // NEW FUNCTIONS //
 function reorder_sequence(seq) {
-    // S11_1
+    // S12_1
     const functions_seq = filter(x => is_function_declaration(x), seq);
     const other_seq = filter(x => !is_function_declaration(x), seq);
     
@@ -979,7 +979,7 @@ function scan_out_names(component) {
 
 function check_assignments(C) {
     display("CHECKING ASSIGNMENTS...");
-    // S11_2
+    // S12_2
     // just checks if a name is declared somewhere in the same block
     const declarations = scan_out_declarations(block_body(C));
     let names = scan_out_names(block_body(C));
