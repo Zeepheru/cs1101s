@@ -13,6 +13,8 @@ functional programming language, including:
 Examples at the end of the program
 */
 
+// CHANGES
+const unassigned = [];
 
 function evaluate(program) { 
     let C = list(make_block(program));
@@ -268,7 +270,7 @@ function scan_out_declarations(component) {
 
 function list_of_unassigned(symbols) {
     // CHANGES
-    return map(symbol => undefined, symbols);
+    return map(symbol => unassigned, symbols);
 }
 
 function apply_binary(operator, op1, op2) {
@@ -795,7 +797,7 @@ function lookup_symbol_value(symbol, env) {
     // CHANGES
     const val = env_loop(env);
     
-    if (val === undefined) {
+    if (val === unassigned) {
         const msg = "Value unassigned: " + symbol;
         error(msg);
     }
